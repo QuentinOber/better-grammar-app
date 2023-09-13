@@ -35,12 +35,12 @@ function enqueue_bettergrammarapp_scripts() {
 wp_localize_script('bettergrammar-main-scripts', 'user_status', array(
 	'logged_in' => is_user_logged_in()));
 }
-add_action('wp_enqueue_scripts', 'enqueue_bettergrammarapp_scripts');
+add_action('wp_enqueue_scripts', 'enqueue_bettergrammarapp_scripts', 10);
 
 
 /* ALL SHORTCODE HERE */
 
 function better_grammar_shortcode() {
-	return '<div id="better-grammar-app"></div>';}
+	return '<div id="better-grammar-app">Hey</div>';}
 
 add_shortcode('better_grammar', 'better_grammar_shortcode'); 

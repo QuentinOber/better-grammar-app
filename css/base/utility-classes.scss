@@ -1,0 +1,101 @@
+.better-grammar-container {
+  max-width: 900px;
+  margin: 50px auto;
+}
+
+.main-title-large {
+  margin: 10px 0;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 35px;
+  @include atBig {
+    font-size: 32px;
+    line-height: 38px;
+  }
+}
+
+.title-medium {
+  margin: 15px 0;
+  padding-bottom: 15px;
+  font-weight: 700;
+  font-size: 28px;
+  text-align: center;
+  color: $mainBlue;
+  @include atBig {
+    text-align: start;
+    font-size: 35px;
+  }
+}
+
+.container--narrow {
+  max-width: 960px;
+}
+
+.section-break {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 2.5rem 0;
+}
+
+.divider {
+  position: relative;
+  margin: 40px 0;
+  height: 5px;
+}
+
+.no-margin {
+  margin: 0;
+}
+.nu {
+  text-decoration: none;
+}
+.nu:hover {
+  text-decoration: underline;
+}
+
+.t-left {
+  text-align: left;
+}
+.t-right {
+  text-align: right;
+}
+.t-center {
+  text-align: center;
+}
+
+.t-small {
+  font-size: 0.85rem;
+}
+
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+
+.hide {
+  display: none !important;
+}
+
+@include atBig {
+  .hide-large {
+    display: none;
+  }
+}
+
+@include atSmall {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+.btn {
+  background-color: $mainBlue;
+  padding: 5px 50px;
+}
+
+.strikethrough {
+  text-decoration-line: line-through;
+  text-decoration-color: $mainBlue;
+}

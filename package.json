@@ -11,7 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wordpress/scripts": "^26.12.0"
+    "@wordpress/scripts": "^26.12.0",
+    "react-router-dom": "^6.15.0"
   },
   "description": ""
 }

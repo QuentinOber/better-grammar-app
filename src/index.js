@@ -1,10 +1,14 @@
-import '../css/styles.scss'
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import { HashRouter } from 'react-router-dom'
 
-function Main() {
-  return 'test'
+const element = document.getElementById('better-grammar-app')
+if (element !== null) {
+  const root = ReactDOM.createRoot(element)
+  root.render(
+    <HashRouter>
+      <App />
+    </HashRouter>
+  )
 }
-
-const root = ReactDOM.createRoot(document.querySelector('#better-grammar-app'))
-root.render(<Main />)

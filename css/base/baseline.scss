@@ -1,0 +1,27 @@
+$mainWhite: #f9fff6;
+$mainGray: #5a5a5a;
+$mainRed: #e63946;
+$darkBlue: #383f4e;
+$mainBlue: #0d3b66;
+$mediumBlue: #457b9d;
+$lightBlue: #b9e7e8;
+
+/* MOBILE ALWAYS FIRST */
+
+@mixin atSmall {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin atBig {
+  @media (min-width: 767px) {
+    @content;
+  }
+}
+
+@mixin atMedium {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
