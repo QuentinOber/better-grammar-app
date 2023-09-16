@@ -1,0 +1,28 @@
+.game-button {
+  margin: 10px;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: $mainRed;
+  border: 2px solid $mainBlue;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px $mainBlue;
+  transition: all 0.3s ease;
+}
+
+.game-button:hover {
+  background-color: #fff;
+  color: $mainRed;
+  border: 2px solid $mainRed;
+  box-shadow: 5px 5px 0px $mainRed;
+}
+
+.game-button:active {
+  background-color: #fcf414;
+  box-shadow: none;
+  transform: translateY(4px);
+}

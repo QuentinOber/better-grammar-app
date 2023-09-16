@@ -1,6 +1,14 @@
 .better-grammar-container {
   max-width: 900px;
-  margin: 50px auto;
+  margin: 40px auto;
+  p,
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: $mainBlue;
+    line-height: 130%;
+  }
 }
 
 .main-title-large {
@@ -29,6 +37,11 @@
 
 .container--narrow {
   max-width: 960px;
+}
+
+.main-highlight {
+  color: $mainBlue;
+  font-weight: bold;
 }
 
 .section-break {
@@ -95,7 +108,61 @@
   padding: 5px 50px;
 }
 
+// SPECIAL GLOBAL EFFECTS
+
 .strikethrough {
   text-decoration-line: line-through;
   text-decoration-color: $mainBlue;
+}
+
+.bounce {
+  animation: bounce-animation 1s ease infinite;
+}
+
+@keyframes bounce-animation {
+  0% {
+    transform: scale(1, 1) translateY(0);
+  }
+  10% {
+    transform: scale(1.1, 0.9) translateY(0);
+  }
+  30% {
+    transform: scale(0.9, 1.1) translateY(-40px);
+  }
+  50% {
+    transform: scale(1, 1) translateY(0);
+  }
+  100% {
+    transform: scale(1, 1) translateY(0);
+  }
+}
+
+.point-winned-animation {
+  animation: shake 0.5s ease;
+  color: green;
+  font-weight: 600;
+}
+
+.point-lost-animation {
+  animation: shake 0.5s ease;
+  color: red;
+  font-weight: 600;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

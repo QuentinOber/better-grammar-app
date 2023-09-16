@@ -1,13 +1,13 @@
 .nav-wrapper {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   button {
     background-color: white;
     color: $mainBlue;
     border-radius: 10em;
     font-size: 17px;
     font-weight: 600;
-    padding: 1em 2em;
+    padding: 0.5em 1em;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     border: 1px solid $mainBlue;

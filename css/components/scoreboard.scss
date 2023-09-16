@@ -1,0 +1,27 @@
+.scoreboard-wrapper {
+  h2 {
+    text-align: center;
+    font-size: 35px;
+
+    @include atBig {
+      font-size: 50px;
+    }
+  }
+  .my-score {
+    max-width: 400px;
+    margin: auto;
+    @include atBig {
+      font-size: 28px;
+    }
+    font-size: 20px;
+    color: $mainGray;
+    text-align: center;
+  }
+  .retry {
+    max-width: 300px;
+    margin: 20px auto;
+    display: flex;
+    size: 30px;
+    align-items: center;
+  }
+}

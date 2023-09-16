@@ -10,9 +10,6 @@ function Navigation() {
       <Link to="/find-number">
         <button>Les nombres</button>
       </Link>
-      <Link to="/preposition">
-        <button>Les prépositions</button>
-      </Link>
     </div>
   )
 }

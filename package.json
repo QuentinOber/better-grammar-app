@@ -12,7 +12,12 @@
   "license": "ISC",
   "dependencies": {
     "@wordpress/scripts": "^26.12.0",
-    "react-router-dom": "^6.15.0"
+    "immer": "^10.0.2",
+    "react-router-dom": "^6.15.0",
+    "use-immer": "^0.9.0"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "file-loader": "^6.2.0"
+  }
 }
