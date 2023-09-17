@@ -4162,6 +4162,36 @@ function App() {
 
 /***/ }),
 
+/***/ "./src/components/LoginBanner.js":
+/*!***************************************!*\
+  !*** ./src/components/LoginBanner.js ***!
+  \***************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function LoginBanner() {
+  let loginUrl = '#';
+  if (user_status.login_url) {
+    loginUrl = user_status.login_url;
+  }
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "login-banner"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Connecte-toi pour garder tes r\xE9sultats"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: loginUrl
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "blue-button"
+  }, "LOGIN")));
+}
+/* harmony default export */ __webpack_exports__["default"] = (LoginBanner);
+
+/***/ }),
+
 /***/ "./src/components/Navigation.js":
 /*!**************************************!*\
   !*** ./src/components/Navigation.js ***!
@@ -4223,15 +4253,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _LoginBanner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LoginBanner */ "./src/components/LoginBanner.js");
+
 
 
 function ScoreBoard({
   onRestartGame,
   userPoints
 }) {
+  let isLoggedIn = false;
+  if (typeof user_status !== 'undefined') {
+    isLoggedIn = user_status.logged_in;
+  }
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "scoreboard-wrapper"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "C'est termin\xE9 !"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "C'est termin\xE9 !"), isLoggedIn === '1' ? null : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_LoginBanner__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-score"
   }, "Ton score est de ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "main-highlight"
@@ -4339,10 +4375,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PageLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/PageLayout */ "./src/components/PageLayout.js");
 /* harmony import */ var _data_AppContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../data/AppContext */ "./src/data/AppContext.js");
 /* harmony import */ var _data_AppDispatch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../data/AppDispatch */ "./src/data/AppDispatch.js");
-/* harmony import */ var use_immer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! use-immer */ "./node_modules/use-immer/dist/use-immer.module.js");
+/* harmony import */ var use_immer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! use-immer */ "./node_modules/use-immer/dist/use-immer.module.js");
 /* harmony import */ var _data_FrenchNumbers_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../data/FrenchNumbers.json */ "./src/data/FrenchNumbers.json");
 /* harmony import */ var _components_timer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/timer */ "./src/components/timer.js");
 /* harmony import */ var _components_ScoreBoard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/ScoreBoard */ "./src/components/ScoreBoard.js");
+/* harmony import */ var _assets_SuccessSound_mp3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../assets/SuccessSound.mp3 */ "./src/assets/SuccessSound.mp3");
+/* harmony import */ var _assets_FailedSound_mp3__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../assets/FailedSound.mp3 */ "./src/assets/FailedSound.mp3");
 
 
 
@@ -4354,7 +4392,7 @@ __webpack_require__.r(__webpack_exports__);
 //components
 
 
-// import SuccessSound from '../assets/SuccessSound.mp3'
+
 
 function FindNumber() {
   const [randomNumber, setRandomNumber] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
@@ -4366,17 +4404,18 @@ function FindNumber() {
   const timerRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(true); // useless?
 
   const initialState = {
-    hasClickedStarted: true,
+    hasClickedStarted: false,
     isLevelVisible: false,
-    selectedLevel: null,
-    isPlaying: true,
+    selectedLevel: 'easy',
+    isPlaying: false,
     isGameOver: false,
     hasTimerStated: false,
     foundNumbers: [],
     skippedNumbers: {},
     userPoints: 0
   };
-  const [state, dispatch] = (0,use_immer__WEBPACK_IMPORTED_MODULE_8__.useImmerReducer)(numberReducer, initialState);
+  const [keys, setKeys] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
+  const [state, dispatch] = (0,use_immer__WEBPACK_IMPORTED_MODULE_10__.useImmerReducer)(numberReducer, initialState);
   function numberReducer(draft, action) {
     switch (action.type) {
       case 'start':
@@ -4386,6 +4425,8 @@ function FindNumber() {
       case 'selectLevel':
         draft.isLevelVisible = false;
         draft.selectedLevel = action.value;
+        const newKeys = Object.keys(_data_FrenchNumbers_json__WEBPACK_IMPORTED_MODULE_5__[draft.selectedLevel]);
+        setKeys(newKeys);
         draft.isPlaying = true;
         return;
       case 'gameOver':
@@ -4399,16 +4440,20 @@ function FindNumber() {
         return;
       case 'checkAnswer':
         if (action.value.replace(/\s+/g, '').toLowerCase() == randomNumber.value.replace(/\s+/g, '').toLowerCase()) {
+          const successAudio = new Audio(_assets_SuccessSound_mp3__WEBPACK_IMPORTED_MODULE_8__["default"]);
+          successAudio.play();
           draft.foundNumbers.push(randomNumber.key);
           inputRef.current.value = '';
           draft.userPoints = draft.userPoints + 2;
           setPointWinnedAnimation(true);
-          setTimeout(() => setPointWinnedAnimation(false), 300);
+          setTimeout(() => setPointWinnedAnimation(false), 500);
           setShouldBounce(true);
           setTimeout(() => setShouldBounce(false), 1000);
         }
         return;
       case 'failToAnswer':
+        const failedAudio = new Audio(_assets_FailedSound_mp3__WEBPACK_IMPORTED_MODULE_9__["default"]);
+        failedAudio.play();
         setPointLostAnimation(true);
         setTimeout(() => setPointLostAnimation(false), 300);
         draft.skippedNumbers[randomNumber.key] = randomNumber.value;
@@ -4423,10 +4468,13 @@ function FindNumber() {
         return draft;
     }
   }
-  const keys = Object.keys(_data_FrenchNumbers_json__WEBPACK_IMPORTED_MODULE_5__);
-  const skippedNumbersKeys = Object.keys(state.skippedNumbers);
-  const filteredKeys = keys.filter(item => !state.foundNumbers.includes(item) && !skippedNumbersKeys.includes(item));
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    let selectedLevelNumbers = _data_FrenchNumbers_json__WEBPACK_IMPORTED_MODULE_5__[state.selectedLevel];
+    let filteredKeys = [];
+    const skippedNumbersKeys = Object.keys(state.skippedNumbers);
+    if (keys && keys.length > 0) {
+      filteredKeys = keys.filter(item => !state.foundNumbers.includes(item) && !skippedNumbersKeys.includes(item));
+    }
     inputRef.current.focus(); // focus on the input from start
     console.log('state.foundNumbers:', state.foundNumbers);
     console.log('keys:', keys);
@@ -4434,7 +4482,7 @@ function FindNumber() {
     if (filteredKeys.length) {
       const randomIndex = Math.floor(Math.random() * filteredKeys.length);
       const randomKey = filteredKeys[randomIndex];
-      const randomValue = _data_FrenchNumbers_json__WEBPACK_IMPORTED_MODULE_5__[randomKey];
+      const randomValue = selectedLevelNumbers[randomKey];
       setRandomNumber({
         key: randomKey,
         value: randomValue
@@ -4444,7 +4492,8 @@ function FindNumber() {
         type: 'gameOver'
       });
     }
-  }, [state.foundNumbers, state.skippedNumbers]);
+  }, [state.foundNumbers, state.skippedNumbers, keys]);
+  console.log(state);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_PageLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "game-wrapper"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -4474,7 +4523,7 @@ function FindNumber() {
     className: "game-button",
     onClick: () => dispatch({
       type: 'selectLevel',
-      value: 'hard'
+      value: 'advanced'
     })
   }, "Avanc\xE9"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: state.isPlaying ? 'wrapper-number-game' : 'hide'
@@ -4494,7 +4543,7 @@ function FindNumber() {
   }, state.userPoints, " ", state.userPoints > 1 ? 'points' : 'point')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "number-frame"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: `number ${shouldBounce ? 'bounce' : ''}`
+    className: `number ${shouldBounce ? 'bounce confetti' : ''}`
   }, randomNumber ? randomNumber.key : '...'), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "game-actions"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
@@ -4577,6 +4626,28 @@ function Preposition() {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_PageLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Construction en cours \uD83C\uDFD7\uFE0F"));
 }
 /* harmony default export */ __webpack_exports__["default"] = (Preposition);
+
+/***/ }),
+
+/***/ "./src/assets/FailedSound.mp3":
+/*!************************************!*\
+  !*** ./src/assets/FailedSound.mp3 ***!
+  \************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "bf1aadd00fe01fbafe31baa597744200.mp3");
+
+/***/ }),
+
+/***/ "./src/assets/SuccessSound.mp3":
+/*!*************************************!*\
+  !*** ./src/assets/SuccessSound.mp3 ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "b0d21f9b82e31455293676e0ae7598b7.mp3");
 
 /***/ }),
 
@@ -8523,7 +8594,7 @@ function castImmutable(value) {
   \*************************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"1":"Un","2":"Deux","3":"Trois","4":"Quatre","5":"Cinq","6":"Six","7":"Sept"}');
+module.exports = JSON.parse('{"easy":{"1":"Un","2":"Deux","3":"Trois","4":"Quatre","5":"Cinq","6":"Six","7":"Sept","8":"Huit","9":"Neuf","10":"Dix","11":"Onze","12":"Douze","13":"Treize","14":"Quatorze","15":"Quinze","16":"Seize","17":"Dix-sept","18":"Dix-huit","19":"Dix-neuf","20":"Vingt"},"intermediate":{"21":"Vingt et un","22":"Vingt-deux","23":"Vingt-trois","24":"Vingt-quatre","25":"Vingt-cinq","26":"Vingt-six","27":"Vingt-sept","28":"Vingt-huit","29":"Vingt-neuf","30":"Trente","31":"Trente et un","32":"Trente-deux","33":"Trente-trois","34":"Trente-quatre","35":"Trente-cinq","36":"Trente-six","37":"Trente-sept","38":"Trente-huit","39":"Trente-neuf","40":"Quarante","41":"Quarante et un","42":"Quarante-deux","43":"Quarante-trois","44":"Quarante-quatre","45":"Quarante-cinq","46":"Quarante-six","47":"Quarante-sept","48":"Quarante-huit","49":"Quarante-neuf","50":"Cinquante","51":"Cinquante et un","52":"Cinquante-deux","53":"Cinquante-trois","54":"Cinquante-quatre","55":"Cinquante-cinq","56":"Cinquante-six","57":"Cinquante-sept","58":"Cinquante-huit","59":"Cinquante-neuf","60":"Soixante","61":"Soixante et un","62":"Soixante-deux","63":"Soixante-trois","64":"Soixante-quatre","65":"Soixante-cinq","66":"Soixante-six","67":"Soixante-sept","68":"Soixante-huit","69":"Soixante-neuf","70":"Soixante-dix","71":"Soixante et onze","72":"Soixante-douze","73":"Soixante-treize","74":"Soixante-quatorze","75":"Soixante-quinze","76":"Soixante-seize","77":"Soixante-dix-sept","78":"Soixante-dix-huit","79":"Soixante-dix-neuf","80":"Quatre-vingts","81":"Quatre-vingt-un","82":"Quatre-vingt-deux","83":"Quatre-vingt-trois","84":"Quatre-vingt-quatre","85":"Quatre-vingt-cinq","86":"Quatre-vingt-six","87":"Quatre-vingt-sept","88":"Quatre-vingt-huit","89":"Quatre-vingt-neuf","90":"Quatre-vingt-dix","91":"Quatre-vingt-onze","92":"Quatre-vingt-douze","93":"Quatre-vingt-treize","94":"Quatre-vingt-quatorze","95":"Quatre-vingt-quinze","96":"Quatre-vingt-seize","97":"Quatre-vingt-dix-sept","98":"Quatre-vingt-dix-huit","99":"Quatre-vingt-dix-neuf"},"advanced":{"100":"cent","128":"cent vingt-huit","136":"cent trente-six","145":"cent quarante-cinq","200":"deux cents","214":"deux cent quatorze","226":"deux cent vingt-six","267":"deux cent soixante-sept","307":"trois cent sept","330":"trois cent trente","341":"trois cent quarante et un","387":"trois cent quatre-vingt-sept","419":"quatre cent dix-neuf","423":"quatre cent vingt-trois","430":"quatre cent trente","482":"quatre cent quatre-vingt-deux","504":"cinq cent quatre","509":"cinq cent neuf","523":"cinq cent vingt-trois","591":"cinq cent quatre-vingt-onze","616":"six cent seize","643":"six cent quarante-trois","689":"six cent quatre-vingt-neuf","738":"sept cent trente-huit","756":"sept cent cinquante-six","762":"sept cent soixante-deux","795":"sept cent quatre-vingt-quinze","813":"huit cent treize","854":"huit cent cinquante-quatre","872":"huit cent soixante-douze","951":"neuf cent cinquante et un","962":"neuf cent soixante-deux","972":"neuf cent soixante-douze","1147":"mille cent quarante-sept","1150":"mille cent cinquante","1289":"mille deux cent quatre-vingt-neuf","1327":"mille trois cent vingt-sept","1453":"mille quatre cent cinquante-trois","1782":"mille sept cent quatre-vingt-deux","1809":"mille huit cent neuf","1875":"mille huit cent soixante-quinze","2091":"deux mille quatre-vingt-onze","2203":"deux mille deux cent trois","2274":"deux mille deux cent soixante-quatorze","2374":"deux mille trois cent soixante-quatorze","2491":"deux mille quatre cent quatre-vingt-onze","2569":"deux mille cinq cent soixante-neuf","2654":"deux mille six cent cinquante-quatre","2701":"deux mille sept cent un","2841":"deux mille huit cent quarante et un","3019":"trois mille dix-neuf","3192":"trois mille cent quatre-vingt-douze","3201":"trois mille deux cent un","3311":"trois mille trois cent onze","3482":"trois mille quatre cent quatre-vingt-deux","3829":"trois mille huit cent vingt-neuf","3985":"trois mille neuf cent quatre-vingt-cinq","4027":"quatre mille vingt-sept","4220":"quatre mille deux cent vingt","4401":"quatre mille quatre cent un","4567":"quatre mille cinq cent soixante-sept","4792":"quatre mille sept cent quatre-vingt-douze","4916":"quatre mille neuf cent seize","4931":"quatre mille neuf cent trente et un","4998":"quatre mille neuf cent quatre-vingt-dix-huit","9023":"neuf mille vingt-trois","11982":"onze mille neuf cent quatre-vingt-deux","12943":"douze mille neuf cent quarante-trois","17934":"dix-sept mille neuf cent trente-quatre","18971":"dix-huit mille neuf cent soixante et onze","20190":"vingt mille cent quatre-vingt-dix","23789":"vingt-trois mille sept cent quatre-vingt-neuf","23980":"vingt-trois mille neuf cent quatre-vingts","38912":"trente-huit mille neuf cent douze","39472":"trente-neuf mille quatre cent soixante-douze","47653":"quarante-sept mille six cent cinquante-trois","48723":"quarante-huit mille sept cent vingt-trois","50239":"cinquante mille deux cent trente-neuf","56319":"cinquante-six mille trois cent dix-neuf","58392":"cinquante-huit mille trois cent quatre-vingt-douze","59182":"cinquante-neuf mille cent quatre-vingt-deux","65783":"soixante-cinq mille sept cent quatre-vingt-trois","69284":"soixante-neuf mille deux cent quatre-vingt-quatre","74092":"soixante-quatorze mille quatre-vingt-douze","78421":"soixante-dix-huit mille quatre cent vingt et un","78564":"soixante-dix-huit mille cinq cent soixante-quatre","82319":"quatre-vingt-deux mille trois cent dix-neuf","92458":"quatre-vingt-douze mille quatre cent cinquante-huit","93711":"quatre-vingt-treize mille sept cent onze","94028":"quatre-vingt-quatorze mille vingt-huit","98007":"quatre-vingt-dix-huit mille sept","98322":"quatre-vingt-dix-huit mille trois cent vingt-deux","98472":"quatre-vingt-dix-huit mille quatre cent soixante-douze","103902":"cent trois mille neuf cent deux","104523":"cent quatre mille cinq cent vingt-trois","189234":"cent quatre-vingt-neuf mille deux cent trente-quatre","193748":"cent quatre-vingt-treize mille sept cent quarante-huit","201349":"deux cent un mille trois cent quarante-neuf","209134":"deux cent neuf mille cent trente-quatre","248163":"deux cent quarante-huit mille cent soixante-trois","289634":"deux cent quatre-vingt-neuf mille six cent trente-quatre","295710":"deux cent quatre-vingt-quinze mille sept cent dix","301924":"trois cent un mille neuf cent vingt-quatre","340912":"trois cent quarante mille neuf cent douze","391085":"trois cent quatre-vingt-onze mille quatre-vingt-cinq","402873":"quatre cent deux mille huit cent soixante-treize","410293":"quatre cent dix mille deux cent quatre-vingt-treize","412057":"quatre cent douze mille cinquante-sept","450289":"quatre cent cinquante mille deux cent quatre-vingt-neuf","539201":"cinq cent trente-neuf mille deux cent un","675849":"six cent soixante-quinze mille huit cent quarante-neuf","728910":"sept cent vingt-huit mille neuf cent dix","734002":"sept cent trente-quatre mille deux","780003":"sept cent quatre-vingts mille trois","842763":"huit cent quarante-deux mille sept cent soixante-trois","903471":"neuf cent trois mille quatre cent soixante et onze","1192784":"un million cent quatre-vingt-dix-deux mille sept cent quatre-vingt-quatre","1264910":"un million deux cent soixante-quatre mille neuf cent dix","1302846":"un million trois cent deux mille huit cent quarante-six","1528427":"un million cinq cent vingt-huit mille quatre cent vingt-sept","1675901":"un million six cent soixante-quinze mille neuf cent un","5000000":"cinq millions"}}');
 
 /***/ })
 
@@ -8578,6 +8649,18 @@ module.exports = JSON.parse('{"1":"Un","2":"Deux","3":"Trois","4":"Quatre","5":"
 /******/ 		};
 /******/ 	}();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	!function() {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	}();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	!function() {
 /******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
@@ -8592,6 +8675,29 @@ module.exports = JSON.parse('{"1":"Un","2":"Deux","3":"Trois","4":"Quatre","5":"
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	!function() {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					var i = scripts.length - 1;
+/******/ 					while (i > -1 && !scriptUrl) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	}();
 /******/ 	
 /************************************************************************/

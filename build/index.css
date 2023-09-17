@@ -147,15 +147,14 @@
   }
 }
 .point-winned-animation {
-  animation: shake 0.5s ease;
-  color: green;
-  font-weight: 600;
+  color: rgb(0, 210, 0);
+  font-weight: 700;
 }
 
 .point-lost-animation {
   animation: shake 0.5s ease;
   color: red;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 @keyframes shake {
@@ -163,13 +162,13 @@
     transform: translateX(0);
   }
   25% {
-    transform: translateX(-5px);
+    transform: translateX(-3px);
   }
   50% {
-    transform: translateX(5px);
+    transform: translateX(3px);
   }
   75% {
-    transform: translateX(-5px);
+    transform: translateX(-3px);
   }
   100% {
     transform: translateX(0);
@@ -202,6 +201,11 @@
   margin: 10px auto 20px;
   padding: 20px 10px 30px;
 }
+@media (min-width: 767px) {
+  .game-wrapper .wrapper-number-game {
+    padding-bottom: 80px;
+  }
+}
 .game-wrapper .wrapper-number-game .game-header {
   line-height: 30px;
   color: #0d3b66;
@@ -223,6 +227,7 @@
   text-align: center;
   margin: 0 0 10px 0;
   text-shadow: 4px 4px #b9e7e8;
+  z-index: 100;
 }
 @media (min-width: 767px) {
   .game-wrapper .wrapper-number-game .number {
@@ -247,7 +252,7 @@
 }
 @media (min-width: 767px) {
   .game-wrapper .wrapper-number-game .game-actions input[type=text] {
-    width: 400px;
+    width: 500px;
     font-size: 30px;
   }
 }
@@ -278,6 +283,31 @@
   }
 }
 
+.confetti::before {
+  position: absolute;
+  left: 20%;
+  content: "";
+  width: 5px;
+  height: 8px;
+  animation: 1s explode ease-out 4 backwards, 1s gravity ease-in 4 backwards;
+}
+@media (min-width: 767px) {
+  .confetti::before {
+    left: 40%;
+  }
+}
+
+@keyframes explode {
+  to {
+    box-shadow: 110px 23.3333333333px #f0cd27, 134px 146.6666666667px #f0cd27, 193.5px 130px #f0cd27, 68.5px 143.3333333333px #b9e7e8, 35.5px 0.8333333333px #e63946, 163.5px 20.8333333333px #0d3b66, 174.5px 157.5px #0d3b66, 84.5px 74.1666666667px #f0cd27, 73px 10px #e63946, 132.5px 144.1666666667px #f0cd27, 117px 10px #b9e7e8, 79.5px 144.1666666667px #0d3b66, 53px 166.6666666667px #e63946, 20.5px 160px #f0cd27, 32.5px 131.6666666667px #b9e7e8, 2px 113.3333333333px #0d3b66, 59px 87.5px #0d3b66, 45px 19.1666666667px #0d3b66, 146px 22.5px #b9e7e8, 153.5px 147.5px #e63946, 53px 119.1666666667px #0d3b66, 72.5px 70px #b9e7e8, 146px 56.6666666667px #e63946, 56px 35.8333333333px #b9e7e8, 1.5px 22.5px #b9e7e8, 140.5px 89.1666666667px #b9e7e8, 159px 91.6666666667px #f0cd27, 186.5px 154.1666666667px #f0cd27, 103px 90.8333333333px #0d3b66, 124px 65.8333333333px #0d3b66, 20.5px 17.5px #e63946, 43.5px 155px #e63946, 86px 155.8333333333px #f0cd27, 121.5px 165.8333333333px #0d3b66, 165px 8.3333333333px #0d3b66, 80px 19.1666666667px #b9e7e8, 138.5px 8.3333333333px #0d3b66, 40.5px 7.5px #b9e7e8, 164px 76.6666666667px #e63946, 53.5px 6.6666666667px #e63946, 122.5px 55px #e63946, 138.5px 125px #e63946, 191px 106.6666666667px #f0cd27, 68.5px 120px #e63946, 113.5px 89.1666666667px #b9e7e8, 62px 48.3333333333px #f0cd27, 65px 19.1666666667px #e63946, 139.5px 5px #e63946, 127.5px 48.3333333333px #b9e7e8, 81px 165.8333333333px #e63946, 152.5px 159.1666666667px #e63946, 88.5px 128.3333333333px #0d3b66, 184px 21.6666666667px #f0cd27, 2.5px 103.3333333333px #f0cd27, 34.5px 92.5px #e63946, 171.5px 20.8333333333px #b9e7e8, 103.5px 100.8333333333px #f0cd27, 143px 27.5px #0d3b66, 197px 95.8333333333px #b9e7e8, 54.5px 139.1666666667px #f0cd27, 48px 125.8333333333px #e63946, 196.5px 30px #f0cd27, 142px 36.6666666667px #e63946, 27px 95px #f0cd27, 120.5px 86.6666666667px #b9e7e8, 20.5px 49.1666666667px #0d3b66, 31px 8.3333333333px #e63946, 179.5px 138.3333333333px #0d3b66, 111px 151.6666666667px #b9e7e8, 25.5px 15px #e63946, 24.5px 48.3333333333px #f0cd27, 79px 105px #f0cd27, 69.5px 124.1666666667px #b9e7e8, 163px 140.8333333333px #f0cd27, 27.5px 22.5px #0d3b66, 157.5px 15.8333333333px #f0cd27, 150.5px 32.5px #f0cd27, 52.5px 134.1666666667px #b9e7e8, 184px 6.6666666667px #0d3b66, 134.5px 80px #0d3b66, 168px 119.1666666667px #b9e7e8, 52.5px 155px #0d3b66, 199.5px 9.1666666667px #0d3b66, 154px 133.3333333333px #f0cd27, 29px 55px #0d3b66, 12.5px 147.5px #b9e7e8, 136px 150px #0d3b66, 100px 100.8333333333px #0d3b66, 154.5px 4.1666666667px #0d3b66, 178px 22.5px #0d3b66, 166px 41.6666666667px #f0cd27;
+  }
+}
+@keyframes gravity {
+  to {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
 .nav-wrapper {
   display: flex;
   gap: 15px;
@@ -318,15 +348,40 @@
   box-shadow: 5px 5px 0px #0d3b66;
   transition: all 0.3s ease;
 }
-
 .game-button:hover {
   background-color: #fff;
   color: #e63946;
   border: 2px solid #e63946;
   box-shadow: 5px 5px 0px #e63946;
 }
-
 .game-button:active {
+  background-color: #fcf414;
+  box-shadow: none;
+  transform: translateY(4px);
+}
+
+.blue-button {
+  margin: 10px;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #0d3b66;
+  border: 2px solid #0d3b66;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #b9e7e8;
+  transition: all 0.3s ease;
+}
+.blue-button:hover {
+  background-color: #fff;
+  color: #e63946;
+  border: 2px solid #0d3b66;
+  box-shadow: 5px 5px 0px #0d3b66;
+}
+.blue-button:active {
   background-color: #fcf414;
   box-shadow: none;
   transform: translateY(4px);
@@ -359,6 +414,30 @@
   display: flex;
   size: 30px;
   align-items: center;
+}
+
+.login-banner {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px -2000px;
+  background-color: #e63946;
+}
+.login-banner p {
+  text-align: center;
+  max-width: 300px;
+  color: white;
+  font-size: 22px;
+  margin: 5px 0 !important;
+}
+@media (min-width: 767px) {
+  .login-banner p {
+    max-width: 600px;
+    font-size: 28px;
+    margin: 15px 0 !important;
+  }
 }
 
 /*# sourceMappingURL=index.css.map*/

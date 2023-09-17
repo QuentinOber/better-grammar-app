@@ -12,17 +12,42 @@
   border-radius: 10px;
   box-shadow: 5px 5px 0px $mainBlue;
   transition: all 0.3s ease;
+  &:hover {
+    background-color: #fff;
+    color: $mainRed;
+    border: 2px solid $mainRed;
+    box-shadow: 5px 5px 0px $mainRed;
+  }
+  &:active {
+    background-color: #fcf414;
+    box-shadow: none;
+    transform: translateY(4px);
+  }
 }
 
-.game-button:hover {
-  background-color: #fff;
-  color: $mainRed;
-  border: 2px solid $mainRed;
-  box-shadow: 5px 5px 0px $mainRed;
-}
-
-.game-button:active {
-  background-color: #fcf414;
-  box-shadow: none;
-  transform: translateY(4px);
+.blue-button {
+  margin: 10px;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: $mainBlue;
+  border: 2px solid $mainBlue;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px $lightBlue;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: #fff;
+    color: $mainRed;
+    border: 2px solid $mainBlue;
+    box-shadow: 5px 5px 0px $mainBlue;
+  }
+  &:active {
+    background-color: #fcf414;
+    box-shadow: none;
+    transform: translateY(4px);
+  }
 }

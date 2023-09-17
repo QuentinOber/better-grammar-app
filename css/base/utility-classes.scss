@@ -138,15 +138,14 @@
 }
 
 .point-winned-animation {
-  animation: shake 0.5s ease;
-  color: green;
-  font-weight: 600;
+  color: rgb(0, 210, 0);
+  font-weight: 700;
 }
 
 .point-lost-animation {
   animation: shake 0.5s ease;
   color: red;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 @keyframes shake {
@@ -154,13 +153,13 @@
     transform: translateX(0);
   }
   25% {
-    transform: translateX(-5px);
+    transform: translateX(-3px);
   }
   50% {
-    transform: translateX(5px);
+    transform: translateX(3px);
   }
   75% {
-    transform: translateX(-5px);
+    transform: translateX(-3px);
   }
   100% {
     transform: translateX(0);

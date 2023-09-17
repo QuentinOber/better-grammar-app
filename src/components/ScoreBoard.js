@@ -1,12 +1,20 @@
 import React, { useEffect } from 'react'
+import LoginBanner from './LoginBanner'
 
 function ScoreBoard({ onRestartGame, userPoints }) {
+  let isLoggedIn = false
+
+  if (typeof user_status !== 'undefined') {
+    isLoggedIn = user_status.logged_in
+  }
   return (
     <div className="scoreboard-wrapper">
       <h2>C'est terminé !</h2>
+      {isLoggedIn === '1' ? null : <LoginBanner />}
       <div className="my-score">
         Ton score est de <span className="main-highlight">{userPoints} points</span>. Tu peux faire mieux ?
       </div>
+
       <button onClick={() => onRestartGame()} className="retry game-button">
         <svg
           xmlns="http://www.w3.org/2000/svg"

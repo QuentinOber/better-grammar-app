@@ -27,6 +27,9 @@
     box-shadow: 2px 2px $mainBlue;
     margin: 10px auto 20px;
     padding: 20px 10px 30px;
+    @include atBig {
+      padding-bottom: 80px;
+    }
     .game-header {
       @include atBig {
         padding: 0 20px;
@@ -46,6 +49,7 @@
       text-align: center;
       margin: 0 0 10px 0;
       text-shadow: 4px 4px $lightBlue;
+      z-index: 100;
       @include atBig {
         margin: 0 0 50px 0;
         font-size: 150px;
@@ -59,7 +63,7 @@
 
       input[type='text'] {
         @include atBig {
-          width: 400px;
+          width: 500px;
           font-size: 30px;
         }
         width: 100%;
@@ -95,5 +99,55 @@
     @include atBig {
       margin-top: 70px auto 20px;
     }
+  }
+}
+
+// CONFETTI
+
+$particles: 90;
+$width: 400;
+$height: 200;
+
+// Array of colours to randomly populate the particle colours.
+$colorsConfetti: $mainBlue, $lightBlue, #f0cd27, $mainRed;
+
+// Get the random colour
+@function random-color() {
+  @return nth($colorsConfetti, random(4));
+}
+
+// Create the explosion...
+$box-shadow: ();
+@for $i from 0 through $particles {
+  $box-shadow: $box-shadow, calc(random($width) * 1 / 2) + px calc(random($height) / 1.2) + px #{random-color()};
+}
+
+.confetti {
+  &::before {
+    position: absolute;
+    left: 20%;
+    @include atBig {
+      left: 40%;
+    }
+
+    content: '';
+    width: 5px;
+    height: 8px;
+    animation: 1s explode ease-out 4 backwards, 1s gravity ease-in 4 backwards;
+    // animation-delay: 0.5;
+    // animation-duration: 1.25s;
+  }
+}
+
+@keyframes explode {
+  to {
+    box-shadow: $box-shadow;
+  }
+}
+
+@keyframes gravity {
+  to {
+    transform: translateY(40px);
+    opacity: 0;
   }
 }

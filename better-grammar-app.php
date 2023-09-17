@@ -31,11 +31,14 @@ function enqueue_bettergrammarapp_scripts() {
 	);
 	wp_localize_script('bettergrammar-main-scripts', 'wpApiSettings', $script_data_array);
 
-// localize if user is logged in
+// localize wordpress data 
 wp_localize_script('bettergrammar-main-scripts', 'user_status', array(
-	'logged_in' => is_user_logged_in()));
+	'logged_in' => is_user_logged_in(),
+	'login_url' => wp_login_url()
+));
+	
 }
-add_action('wp_enqueue_scripts', 'enqueue_bettergrammarapp_scripts', 10);
+add_action('wp_enqueue_scripts', 'enqueue_bettergrammarapp_scripts', 99);
 
 
 /* ALL SHORTCODE HERE */

@@ -8,7 +8,8 @@ import frenchNumbers from '../data/FrenchNumbers.json'
 //components
 import Timer from '../components/timer'
 import ScoreBoard from '../components/ScoreBoard'
-// import SuccessSound from '../assets/SuccessSound.mp3'
+import SuccessSound from '../assets/SuccessSound.mp3'
+import FailedSound from '../assets/FailedSound.mp3'
 
 function FindNumber() {
   const [randomNumber, setRandomNumber] = useState(null)
@@ -22,10 +23,10 @@ function FindNumber() {
   const timerRef = useRef(true) // useless?
 
   const initialState = {
-    hasClickedStarted: true,
+    hasClickedStarted: false,
     isLevelVisible: false,
-    selectedLevel: null,
-    isPlaying: true,
+    selectedLevel: 'easy',
+    isPlaying: false,
     isGameOver: false,
     hasTimerStated: false,
     foundNumbers: [],
@@ -33,6 +34,7 @@ function FindNumber() {
     userPoints: 0,
   }
 
+  const [keys, setKeys] = useState([])
   const [state, dispatch] = useImmerReducer(numberReducer, initialState)
 
   function numberReducer(draft, action) {
@@ -44,6 +46,8 @@ function FindNumber() {
       case 'selectLevel':
         draft.isLevelVisible = false
         draft.selectedLevel = action.value
+        const newKeys = Object.keys(frenchNumbers[draft.selectedLevel])
+        setKeys(newKeys)
         draft.isPlaying = true
         return
       case 'gameOver':
@@ -57,16 +61,20 @@ function FindNumber() {
         return
       case 'checkAnswer':
         if (action.value.replace(/\s+/g, '').toLowerCase() == randomNumber.value.replace(/\s+/g, '').toLowerCase()) {
+          const successAudio = new Audio(SuccessSound)
+          successAudio.play()
           draft.foundNumbers.push(randomNumber.key)
           inputRef.current.value = ''
           draft.userPoints = draft.userPoints + 2
           setPointWinnedAnimation(true)
-          setTimeout(() => setPointWinnedAnimation(false), 300)
+          setTimeout(() => setPointWinnedAnimation(false), 500)
           setShouldBounce(true)
           setTimeout(() => setShouldBounce(false), 1000)
         }
         return
       case 'failToAnswer':
+        const failedAudio = new Audio(FailedSound)
+        failedAudio.play()
         setPointLostAnimation(true)
         setTimeout(() => setPointLostAnimation(false), 300)
         draft.skippedNumbers[randomNumber.key] = randomNumber.value
@@ -83,11 +91,14 @@ function FindNumber() {
     }
   }
 
-  const keys = Object.keys(frenchNumbers)
-  const skippedNumbersKeys = Object.keys(state.skippedNumbers)
-  const filteredKeys = keys.filter((item) => !state.foundNumbers.includes(item) && !skippedNumbersKeys.includes(item))
-
   useEffect(() => {
+    let selectedLevelNumbers = frenchNumbers[state.selectedLevel]
+    let filteredKeys = []
+    const skippedNumbersKeys = Object.keys(state.skippedNumbers)
+
+    if (keys && keys.length > 0) {
+      filteredKeys = keys.filter((item) => !state.foundNumbers.includes(item) && !skippedNumbersKeys.includes(item))
+    }
     inputRef.current.focus() // focus on the input from start
     console.log('state.foundNumbers:', state.foundNumbers)
     console.log('keys:', keys)
@@ -97,12 +108,14 @@ function FindNumber() {
     if (filteredKeys.length) {
       const randomIndex = Math.floor(Math.random() * filteredKeys.length)
       const randomKey = filteredKeys[randomIndex]
-      const randomValue = frenchNumbers[randomKey]
+      const randomValue = selectedLevelNumbers[randomKey]
       setRandomNumber({ key: randomKey, value: randomValue })
     } else {
       dispatch({ type: 'gameOver' })
     }
-  }, [state.foundNumbers, state.skippedNumbers])
+  }, [state.foundNumbers, state.skippedNumbers, keys])
+
+  console.log(state)
 
   return (
     <PageLayout>
@@ -122,7 +135,7 @@ function FindNumber() {
             <button className="game-button" onClick={() => dispatch({ type: 'selectLevel', value: 'intermediate' })}>
               Intermédiaire
             </button>
-            <button className="game-button" onClick={() => dispatch({ type: 'selectLevel', value: 'hard' })}>
+            <button className="game-button" onClick={() => dispatch({ type: 'selectLevel', value: 'advanced' })}>
               Avancé
             </button>
           </div>
@@ -149,7 +162,9 @@ function FindNumber() {
             </div>
           </div>
           <div className="number-frame">
-            <p className={`number ${shouldBounce ? 'bounce' : ''}`}>{randomNumber ? randomNumber.key : '...'}</p>
+            <p className={`number ${shouldBounce ? 'bounce confetti' : ''}`}>
+              {randomNumber ? randomNumber.key : '...'}
+            </p>
 
             <div className="game-actions">
               <input
