@@ -1,10 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PageLayout from '../components/PageLayout'
+import LoginBanner from '../components/LoginBanner'
 
 function Home() {
+  let isLoggedIn = false
+
+  if (typeof user !== 'undefined') {
+    isLoggedIn = user.logged_in === '1'
+  }
   return (
     <PageLayout>
+      {isLoggedIn ? null : <LoginBanner />}
       <div className="home-wrapper">
         <h2>Retrouve tous les jeux ici</h2>
         <div className="games-selection">

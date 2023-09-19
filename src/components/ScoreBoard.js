@@ -8,8 +8,8 @@ function ScoreBoard({ onRestartGame, userPoints, isGameOver, level }) {
   const [topScores, setTopScores] = useState([])
   const [myScores, setMyScores] = useState([])
 
-  if (typeof user_status !== 'undefined') {
-    isLoggedIn = user_status.logged_in === '1'
+  if (typeof user !== 'undefined') {
+    isLoggedIn = user.logged_in === '1'
   }
 
   useEffect(() => {

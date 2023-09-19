@@ -1,13 +1,17 @@
-.better-grammar-container {
+#better-grammar-app {
   max-width: 900px;
-  margin: 40px auto;
+  padding: 0 10px;
+  margin: 10px auto;
+  line-height: 130%;
+  @include atBig {
+    margin: 25px auto;
+  }
   p,
   h1,
   h2,
   h3,
   h4 {
     color: $mainBlue;
-    line-height: 130%;
   }
 }
 

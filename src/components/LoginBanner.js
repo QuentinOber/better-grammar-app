@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 
 function LoginBanner() {
   let loginUrl = '#'
-  if (user_status.login_url) {
-    loginUrl = user_status.login_url
+  if (user.login_url) {
+    loginUrl = user.login_url
   }
 
   return (

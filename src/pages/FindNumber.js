@@ -52,8 +52,8 @@ function FindNumber() {
         draft.isGameOver = true
         draft.isPlaying = false
         inputRef.current.value = ''
-        if (typeof user_status !== 'undefined') {
-          if (user_status.logged_in === '1') {
+        if (typeof user !== 'undefined') {
+          if (user.logged_in === '1') {
             saveNumberResults(draft.userPoints, draft.selectedLevel)
           }
         }
@@ -100,7 +100,7 @@ function FindNumber() {
 
   switch (state.selectedLevel) {
     case 'easy':
-      howManyseconds = 3
+      howManyseconds = 30
       break
     case 'intermediate':
       howManyseconds = 60

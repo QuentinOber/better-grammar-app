@@ -10,13 +10,13 @@
   p {
     text-align: center;
     max-width: 300px;
-    color: white;
-    font-size: 22px;
+    color: white !important;
+    font-size: 20px;
     margin: 5px 0 !important;
 
     @include atBig {
       max-width: 600px;
-      font-size: 28px;
+      font-size: 25px;
       margin: 15px 0 !important;
     }
   }

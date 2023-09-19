@@ -2,7 +2,7 @@
 /*
 Plugin Name: Better Grammar App
 Description: Grammar Exercises
-Version: 1.0.2
+Version: 1.0.3
 Author: Quentin Ober
 Author URI: https://www.linkedin.com/in/quentinober/
 Text Domain: bettergrammarapp
@@ -31,13 +31,12 @@ function enqueue_bettergrammarapp_scripts() {
 	wp_enqueue_script('bettergrammar-main-scripts', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-element', 'wp-blocks', 'wp-editor'), $plugin_version, true);
 	wp_enqueue_style('bettergrammar-main-styles', plugin_dir_url(__FILE__) . 'build/index.css', array(), $plugin_version);
 
-	$script_data_array = array(
-			'root' => esc_url_raw(rest_url()),
-			'nonce' => wp_create_nonce('wp_rest')
-	);
-	wp_localize_script('bettergrammar-main-scripts', 'wpApiSettings', $script_data_array);
 
-	wp_localize_script('bettergrammar-main-scripts', 'user_status', array(
+	wp_localize_script('bettergrammar-main-scripts', 'wpApiSettings', array(
+		'root' => esc_url_raw(rest_url()),
+		'nonce' => wp_create_nonce('wp_rest')));
+
+	wp_localize_script('bettergrammar-main-scripts', 'user', array(
 		'logged_in' => is_user_logged_in(),
 		'login_url' => wp_login_url()
 	));
@@ -45,6 +44,6 @@ function enqueue_bettergrammarapp_scripts() {
 add_action('wp_enqueue_scripts', 'enqueue_bettergrammarapp_scripts', 99);
 
 function better_grammar_shortcode() {
-	return '<div id="better-grammar-app">Hey</div>';
+	return '<div id="better-grammar-app"></div>';
 }
 add_shortcode('better_grammar', 'better_grammar_shortcode'); 

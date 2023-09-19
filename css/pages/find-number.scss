@@ -27,7 +27,7 @@
 
   .wrapper-number-game {
     margin: 10px auto 0px;
-    padding: 20px 10px 30px;
+    padding: 20px 10px 10px;
     @include atBig {
       border: 4px solid $mainBlue;
       border-radius: 8px;
@@ -51,7 +51,7 @@
       font-size: 95px;
       font-weight: 600;
       text-align: center;
-      margin: 20px 10px;
+      margin: 10px 20px;
       text-shadow: 4px 4px $lightBlue;
       z-index: 100;
       line-height: 100%;

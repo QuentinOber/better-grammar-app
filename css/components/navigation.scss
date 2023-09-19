@@ -2,9 +2,9 @@
   max-width: 900px;
   margin: 0 auto 20px;
   display: flex;
-  gap: 15px;
+  gap: 10px;
   @include atBig {
-    margin: 0 auto 60px;
+    margin: 0 auto 30px;
   }
   button {
     background-color: white;
@@ -12,7 +12,7 @@
     border-radius: 10em;
     font-size: 17px;
     font-weight: 600;
-    padding: 0.5em 1em;
+    padding: 0.5em 0.8em;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     border: 1px solid $mainBlue;

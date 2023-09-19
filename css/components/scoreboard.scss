@@ -11,7 +11,8 @@
   }
   .my-score {
     max-width: 400px;
-    margin: auto;
+    margin: 20px auto;
+    line-height: 130%;
     @include atBig {
       font-size: 28px;
     }

@@ -7,7 +7,7 @@ function Navigation() {
 
   return (
     <div className="nav-wrapper">
-      <Link to="/all-games">
+      <Link to="/">
         <button> ← Tous les jeux</button>
       </Link>
       {currentPath === '/find-number' && (

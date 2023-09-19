@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 function Loader() {
   return (
     <div class="loader-container">
-      <div aria-label="Orange and tan hamster running in a metal wheel" role="img" class="wheel-and-hamster">
+      <div aria-label="Hamster running in a metal wheel" role="img" class="wheel-and-hamster">
         <div class="wheel"></div>
         <div class="hamster">
           <div class="hamster__body">
