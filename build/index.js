@@ -4151,7 +4151,7 @@ function App() {
     path: "/find-number",
     element: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_FindNumber__WEBPACK_IMPORTED_MODULE_7__["default"], null)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
-    path: "/games",
+    path: "/all-games",
     element: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_Home__WEBPACK_IMPORTED_MODULE_6__["default"], null)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
     path: "/preposition",
@@ -4159,6 +4159,58 @@ function App() {
   }))));
 }
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./src/components/Loader.js":
+/*!**********************************!*\
+  !*** ./src/components/Loader.js ***!
+  \**********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function Loader() {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "loader-container"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    "aria-label": "Orange and tan hamster running in a metal wheel",
+    role: "img",
+    class: "wheel-and-hamster"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "wheel"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "hamster"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "hamster__body"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "hamster__head"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "hamster__ear"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "hamster__eye"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "hamster__nose"
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "hamster__limb hamster__limb--fr"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "hamster__limb hamster__limb--fl"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "hamster__limb hamster__limb--br"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "hamster__limb hamster__limb--bl"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "hamster__tail"
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "spoke"
+  })));
+}
+/* harmony default export */ __webpack_exports__["default"] = (Loader);
 
 /***/ }),
 
@@ -4203,18 +4255,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 
 
 
 function Navigation() {
+  const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useLocation)();
+  const currentPath = location.pathname;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "nav-wrapper"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    to: "/games"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", null, " \u2190 Tous les jeux")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    to: "/find-number"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", null, "Les nombres")));
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/all-games"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", null, " \u2190 Tous les jeux")), currentPath === '/find-number' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "selected"
+  }, "Les nombres")), currentPath === '/preposition' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "selected"
+  }, "Les pr\xE9positions")));
 }
 /* harmony default export */ __webpack_exports__["default"] = (Navigation);
 
@@ -4254,22 +4311,53 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _LoginBanner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LoginBanner */ "./src/components/LoginBanner.js");
+/* harmony import */ var _hooks_DateFormat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/DateFormat */ "./src/hooks/DateFormat.js");
+
 
 
 
 function ScoreBoard({
   onRestartGame,
-  userPoints
+  userPoints,
+  isGameOver,
+  level
 }) {
   let isLoggedIn = false;
+  const [topScores, setTopScores] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
+  const [myScores, setMyScores] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   if (typeof user_status !== 'undefined') {
-    isLoggedIn = user_status.logged_in;
+    isLoggedIn = user_status.logged_in === '1';
   }
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    const apiTopUrl = `/wp-json/better-grammar/v1/find_number_top_15/${level}`;
+    const fetchTopScores = () => {
+      fetch(apiTopUrl).then(response => response.json()).then(data => setTopScores(data)).catch(error => console.error('Error fetching data:', error));
+    };
+    const apiMyScoresUrl = `/wp-json/better-grammar/v1/find_number_top_5/${level}`;
+    const nonce = wpApiSettings.nonce;
+    const fetchMyScores = () => {
+      if (isLoggedIn) {
+        fetch(apiMyScoresUrl, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-WP-Nonce': nonce
+          }
+        }).then(response => response.json()).then(data => setMyScores(data)).catch(error => console.error('Error fetching my top 5 scores:', error));
+      } else {
+        return;
+      }
+    };
+    if (isGameOver) {
+      setTimeout(fetchTopScores, 2000); // 2-second delay
+      setTimeout(fetchMyScores, 2000);
+    }
+  }, [isGameOver]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "scoreboard-wrapper"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "C'est termin\xE9 !"), isLoggedIn === '1' ? null : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_LoginBanner__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "C'est termin\xE9 !"), isLoggedIn ? null : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_LoginBanner__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-score"
-  }, "Ton score est de ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, "Bravo ! Ton score est de ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "main-highlight"
   }, userPoints, " points"), ". Tu peux faire mieux ?"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => onRestartGame(),
@@ -4285,7 +4373,21 @@ function ScoreBoard({
     d: "M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"
-  })), "Nouveau jeu"));
+  })), "Nouveau Jeu"), isLoggedIn && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "\uD83C\uDFC6 Mes meilleurs scores"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", {
+    className: "score-table"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Points"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Date"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, myScores.length > 0 && myScores.map((score, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
+    key: index
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "main-highlight"
+  }, score.game_results)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_hooks_DateFormat__WEBPACK_IMPORTED_MODULE_3__.formatDate)(score.result_date))))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "\uD83D\uDCAA Les meilleurs "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", {
+    className: "score-table"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Points"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Joueur"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Rang"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, topScores.map((score, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
+    key: index
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "main-highlight"
+  }, score.game_results)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "main-highlight"
+  }, score.username)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, index + 1))))));
 }
 /* harmony default export */ __webpack_exports__["default"] = (ScoreBoard);
 
@@ -4305,15 +4407,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Timer({
-  howManySeconds,
+  howManyseconds,
   onGameOver
 }) {
-  const [counter, setCounter] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(howManySeconds);
+  const [counter, setCounter] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(howManyseconds);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let timer;
     if (counter > 0) {
       timer = setTimeout(() => setCounter(counter - 1), 1000);
     } else {
+      console.log('Game Over Triggered');
       onGameOver(); // Call the callback function when the timer reaches zero
     }
 
@@ -4361,6 +4464,60 @@ const AppDispatch = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)();
 
 /***/ }),
 
+/***/ "./src/hooks/DateFormat.js":
+/*!*********************************!*\
+  !*** ./src/hooks/DateFormat.js ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   formatDate: function() { return /* binding */ formatDate; }
+/* harmony export */ });
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  return `${day}/${month}/${year} - ${hours}:${minutes}`;
+}
+
+/***/ }),
+
+/***/ "./src/hooks/SaveResults.js":
+/*!**********************************!*\
+  !*** ./src/hooks/SaveResults.js ***!
+  \**********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   saveNumberResults: function() { return /* binding */ saveNumberResults; }
+/* harmony export */ });
+function saveNumberResults(userPoints, selectedLevel) {
+  const data = {
+    game_results: userPoints,
+    game_level: selectedLevel
+  };
+  const nonce = wpApiSettings.nonce;
+  fetch('/wp-json/better-grammar/v1/add_find_number_result', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-WP-Nonce': nonce
+    },
+    body: JSON.stringify(data)
+  }).then(response => response.json()).then(data => {
+    console.log('Success:', data);
+  }).catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+/***/ }),
+
 /***/ "./src/pages/FindNumber.js":
 /*!*********************************!*\
   !*** ./src/pages/FindNumber.js ***!
@@ -4375,12 +4532,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PageLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/PageLayout */ "./src/components/PageLayout.js");
 /* harmony import */ var _data_AppContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../data/AppContext */ "./src/data/AppContext.js");
 /* harmony import */ var _data_AppDispatch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../data/AppDispatch */ "./src/data/AppDispatch.js");
-/* harmony import */ var use_immer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! use-immer */ "./node_modules/use-immer/dist/use-immer.module.js");
+/* harmony import */ var use_immer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! use-immer */ "./node_modules/use-immer/dist/use-immer.module.js");
 /* harmony import */ var _data_FrenchNumbers_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../data/FrenchNumbers.json */ "./src/data/FrenchNumbers.json");
 /* harmony import */ var _components_timer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/timer */ "./src/components/timer.js");
 /* harmony import */ var _components_ScoreBoard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/ScoreBoard */ "./src/components/ScoreBoard.js");
 /* harmony import */ var _assets_SuccessSound_mp3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../assets/SuccessSound.mp3 */ "./src/assets/SuccessSound.mp3");
 /* harmony import */ var _assets_FailedSound_mp3__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../assets/FailedSound.mp3 */ "./src/assets/FailedSound.mp3");
+/* harmony import */ var _hooks_SaveResults__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../hooks/SaveResults */ "./src/hooks/SaveResults.js");
 
 
 
@@ -4394,6 +4552,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+//hooks
+
 function FindNumber() {
   const [randomNumber, setRandomNumber] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
   const [timerKey, setTimerKey] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -4401,12 +4562,9 @@ function FindNumber() {
   const [pointWinnedAnimation, setPointWinnedAnimation] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [pointLostAnimation, setPointLostAnimation] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const inputRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(true);
-  const timerRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(true); // useless?
-
   const initialState = {
-    hasClickedStarted: false,
-    isLevelVisible: false,
-    selectedLevel: 'easy',
+    isLevelVisible: true,
+    selectedLevel: '',
     isPlaying: false,
     isGameOver: false,
     hasTimerStated: false,
@@ -4415,13 +4573,9 @@ function FindNumber() {
     userPoints: 0
   };
   const [keys, setKeys] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
-  const [state, dispatch] = (0,use_immer__WEBPACK_IMPORTED_MODULE_10__.useImmerReducer)(numberReducer, initialState);
+  const [state, dispatch] = (0,use_immer__WEBPACK_IMPORTED_MODULE_11__.useImmerReducer)(numberReducer, initialState);
   function numberReducer(draft, action) {
     switch (action.type) {
-      case 'start':
-        draft.hasClickedStarted = true;
-        draft.isLevelVisible = true;
-        return;
       case 'selectLevel':
         draft.isLevelVisible = false;
         draft.selectedLevel = action.value;
@@ -4431,15 +4585,20 @@ function FindNumber() {
         return;
       case 'gameOver':
         draft.isGameOver = true;
-        // draft.isGameOver = true
         draft.isPlaying = false;
+        inputRef.current.value = '';
+        if (typeof user_status !== 'undefined') {
+          if (user_status.logged_in === '1') {
+            (0,_hooks_SaveResults__WEBPACK_IMPORTED_MODULE_10__.saveNumberResults)(draft.userPoints, draft.selectedLevel);
+          }
+        }
         return;
       case 'restartGame':
         Object.assign(draft, initialState);
         setTimerKey(prevKey => prevKey + 1);
         return;
       case 'checkAnswer':
-        if (action.value.replace(/\s+/g, '').toLowerCase() == randomNumber.value.replace(/\s+/g, '').toLowerCase()) {
+        if (action.value.replace(/\s+|-/g, '').toLowerCase() == randomNumber.value.replace(/\s+|-/g, '').toLowerCase()) {
           const successAudio = new Audio(_assets_SuccessSound_mp3__WEBPACK_IMPORTED_MODULE_8__["default"]);
           successAudio.play();
           draft.foundNumbers.push(randomNumber.key);
@@ -4468,6 +4627,21 @@ function FindNumber() {
         return draft;
     }
   }
+  let howManyseconds = 30;
+  switch (state.selectedLevel) {
+    case 'easy':
+      howManyseconds = 3;
+      break;
+    case 'intermediate':
+      howManyseconds = 60;
+      break;
+    case 'hard':
+      howManyseconds = 120;
+      break;
+    default:
+      howManyseconds = 20;
+      break;
+  }
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let selectedLevelNumbers = _data_FrenchNumbers_json__WEBPACK_IMPORTED_MODULE_5__[state.selectedLevel];
     let filteredKeys = [];
@@ -4476,34 +4650,26 @@ function FindNumber() {
       filteredKeys = keys.filter(item => !state.foundNumbers.includes(item) && !skippedNumbersKeys.includes(item));
     }
     inputRef.current.focus(); // focus on the input from start
-    console.log('state.foundNumbers:', state.foundNumbers);
-    console.log('keys:', keys);
-    console.log(filteredKeys);
-    if (filteredKeys.length) {
-      const randomIndex = Math.floor(Math.random() * filteredKeys.length);
-      const randomKey = filteredKeys[randomIndex];
-      const randomValue = selectedLevelNumbers[randomKey];
-      setRandomNumber({
-        key: randomKey,
-        value: randomValue
-      });
-    } else {
-      dispatch({
-        type: 'gameOver'
-      });
+
+    if (state.isPlaying) {
+      if (filteredKeys.length) {
+        const randomIndex = Math.floor(Math.random() * filteredKeys.length);
+        const randomKey = filteredKeys[randomIndex];
+        const randomValue = selectedLevelNumbers[randomKey];
+        setRandomNumber({
+          key: randomKey,
+          value: randomValue
+        });
+      } else {
+        dispatch({
+          type: 'gameOver'
+        });
+      }
     }
   }, [state.foundNumbers, state.skippedNumbers, keys]);
-  console.log(state);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_PageLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "game-wrapper"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: state.hasClickedStarted ? 'hide' : 'start-wrapper'
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Write the correct number in French"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    onClick: () => dispatch({
-      type: 'start'
-    }),
-    class: "game-button"
-  }, "Start now!")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: state.isLevelVisible ? 'select-level-wrapper' : 'hide'
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "S\xE9lectionne ton niveau"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "levels"
@@ -4523,16 +4689,15 @@ function FindNumber() {
     className: "game-button",
     onClick: () => dispatch({
       type: 'selectLevel',
-      value: 'advanced'
+      value: 'hard'
     })
   }, "Avanc\xE9"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: state.isPlaying ? 'wrapper-number-game' : 'hide'
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "game-header"
   }, state.isPlaying ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_timer__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    ref: timerRef,
     key: timerKey,
-    howManySeconds: 20,
+    howManyseconds: howManyseconds,
     onGameOver: () => {
       dispatch({
         type: 'gameOver'
@@ -4544,7 +4709,7 @@ function FindNumber() {
     className: "number-frame"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: `number ${shouldBounce ? 'bounce confetti' : ''}`
-  }, randomNumber ? randomNumber.key : '...'), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, randomNumber ? randomNumber.key.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '...'), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "game-actions"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     ref: inputRef,
@@ -4570,12 +4735,14 @@ function FindNumber() {
       dispatch({
         type: 'restartGame'
       });
-    }
+    },
+    isGameOver: state.isGameOver,
+    level: state.selectedLevel
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: Object.keys(state.skippedNumbers).length > 0 ? 'missed-numbers' : 'hide'
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "main-highlight"
-  }, Object.keys(state.skippedNumbers).length > 1 ? 'Nombres loupés (missed numbers) :' : 'Nombre loupé (missed number) :'), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, Object.entries(state.skippedNumbers).map(([key, value]) => {
+  }, Object.keys(state.skippedNumbers).length > 1 ? 'Nombres loupés :' : 'Nombre loupé :'), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, Object.entries(state.skippedNumbers).map(([key, value]) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "main-highlight"
     }, key), " : ", value);
@@ -4596,12 +4763,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _components_PageLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/PageLayout */ "./src/components/PageLayout.js");
 
 
 
+
 function Home() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_PageLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Retrouve tous les jeux ici"));
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_PageLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "home-wrapper"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Retrouve tous les jeux ici"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "games-selection"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/find-number"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "card",
+    style: {
+      '--rating': 90
+    }
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "icon"
+  }, "\uD83D\uDD22"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "title"
+  }, "Les nombres, des maths ?"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "description"
+  }, "Retrouve les bons nombres, le plus rapidemment possible..."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "rating"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "#",
+    className: "link"
+  }, "Jouer"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/preposition"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "card",
+    style: {
+      '--rating': 0
+    }
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "icon"
+  }, "\uD83D\uDD1C"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "title"
+  }, "Les pr\xE9positions (\xE0, de, pour...)"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "description"
+  }, "Retrouve les bonnes pr\xE9positions, dans diff\xE9rents contextes..."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "rating"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "#",
+    className: "link"
+  }, "Jouer"))))));
 }
 /* harmony default export */ __webpack_exports__["default"] = (Home);
 
@@ -4619,11 +4828,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_PageLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/PageLayout */ "./src/components/PageLayout.js");
+/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Loader */ "./src/components/Loader.js");
+
 
 
 
 function Preposition() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_PageLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Construction en cours \uD83C\uDFD7\uFE0F"));
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_PageLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "t-center ",
+    style: {
+      marginBottom: '80px'
+    }
+  }, "Construction en cours \uD83C\uDFD7\uFE0F"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Loader__WEBPACK_IMPORTED_MODULE_3__["default"], null));
 }
 /* harmony default export */ __webpack_exports__["default"] = (Preposition);
 
@@ -8594,7 +8810,7 @@ function castImmutable(value) {
   \*************************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"easy":{"1":"Un","2":"Deux","3":"Trois","4":"Quatre","5":"Cinq","6":"Six","7":"Sept","8":"Huit","9":"Neuf","10":"Dix","11":"Onze","12":"Douze","13":"Treize","14":"Quatorze","15":"Quinze","16":"Seize","17":"Dix-sept","18":"Dix-huit","19":"Dix-neuf","20":"Vingt"},"intermediate":{"21":"Vingt et un","22":"Vingt-deux","23":"Vingt-trois","24":"Vingt-quatre","25":"Vingt-cinq","26":"Vingt-six","27":"Vingt-sept","28":"Vingt-huit","29":"Vingt-neuf","30":"Trente","31":"Trente et un","32":"Trente-deux","33":"Trente-trois","34":"Trente-quatre","35":"Trente-cinq","36":"Trente-six","37":"Trente-sept","38":"Trente-huit","39":"Trente-neuf","40":"Quarante","41":"Quarante et un","42":"Quarante-deux","43":"Quarante-trois","44":"Quarante-quatre","45":"Quarante-cinq","46":"Quarante-six","47":"Quarante-sept","48":"Quarante-huit","49":"Quarante-neuf","50":"Cinquante","51":"Cinquante et un","52":"Cinquante-deux","53":"Cinquante-trois","54":"Cinquante-quatre","55":"Cinquante-cinq","56":"Cinquante-six","57":"Cinquante-sept","58":"Cinquante-huit","59":"Cinquante-neuf","60":"Soixante","61":"Soixante et un","62":"Soixante-deux","63":"Soixante-trois","64":"Soixante-quatre","65":"Soixante-cinq","66":"Soixante-six","67":"Soixante-sept","68":"Soixante-huit","69":"Soixante-neuf","70":"Soixante-dix","71":"Soixante et onze","72":"Soixante-douze","73":"Soixante-treize","74":"Soixante-quatorze","75":"Soixante-quinze","76":"Soixante-seize","77":"Soixante-dix-sept","78":"Soixante-dix-huit","79":"Soixante-dix-neuf","80":"Quatre-vingts","81":"Quatre-vingt-un","82":"Quatre-vingt-deux","83":"Quatre-vingt-trois","84":"Quatre-vingt-quatre","85":"Quatre-vingt-cinq","86":"Quatre-vingt-six","87":"Quatre-vingt-sept","88":"Quatre-vingt-huit","89":"Quatre-vingt-neuf","90":"Quatre-vingt-dix","91":"Quatre-vingt-onze","92":"Quatre-vingt-douze","93":"Quatre-vingt-treize","94":"Quatre-vingt-quatorze","95":"Quatre-vingt-quinze","96":"Quatre-vingt-seize","97":"Quatre-vingt-dix-sept","98":"Quatre-vingt-dix-huit","99":"Quatre-vingt-dix-neuf"},"advanced":{"100":"cent","128":"cent vingt-huit","136":"cent trente-six","145":"cent quarante-cinq","200":"deux cents","214":"deux cent quatorze","226":"deux cent vingt-six","267":"deux cent soixante-sept","307":"trois cent sept","330":"trois cent trente","341":"trois cent quarante et un","387":"trois cent quatre-vingt-sept","419":"quatre cent dix-neuf","423":"quatre cent vingt-trois","430":"quatre cent trente","482":"quatre cent quatre-vingt-deux","504":"cinq cent quatre","509":"cinq cent neuf","523":"cinq cent vingt-trois","591":"cinq cent quatre-vingt-onze","616":"six cent seize","643":"six cent quarante-trois","689":"six cent quatre-vingt-neuf","738":"sept cent trente-huit","756":"sept cent cinquante-six","762":"sept cent soixante-deux","795":"sept cent quatre-vingt-quinze","813":"huit cent treize","854":"huit cent cinquante-quatre","872":"huit cent soixante-douze","951":"neuf cent cinquante et un","962":"neuf cent soixante-deux","972":"neuf cent soixante-douze","1147":"mille cent quarante-sept","1150":"mille cent cinquante","1289":"mille deux cent quatre-vingt-neuf","1327":"mille trois cent vingt-sept","1453":"mille quatre cent cinquante-trois","1782":"mille sept cent quatre-vingt-deux","1809":"mille huit cent neuf","1875":"mille huit cent soixante-quinze","2091":"deux mille quatre-vingt-onze","2203":"deux mille deux cent trois","2274":"deux mille deux cent soixante-quatorze","2374":"deux mille trois cent soixante-quatorze","2491":"deux mille quatre cent quatre-vingt-onze","2569":"deux mille cinq cent soixante-neuf","2654":"deux mille six cent cinquante-quatre","2701":"deux mille sept cent un","2841":"deux mille huit cent quarante et un","3019":"trois mille dix-neuf","3192":"trois mille cent quatre-vingt-douze","3201":"trois mille deux cent un","3311":"trois mille trois cent onze","3482":"trois mille quatre cent quatre-vingt-deux","3829":"trois mille huit cent vingt-neuf","3985":"trois mille neuf cent quatre-vingt-cinq","4027":"quatre mille vingt-sept","4220":"quatre mille deux cent vingt","4401":"quatre mille quatre cent un","4567":"quatre mille cinq cent soixante-sept","4792":"quatre mille sept cent quatre-vingt-douze","4916":"quatre mille neuf cent seize","4931":"quatre mille neuf cent trente et un","4998":"quatre mille neuf cent quatre-vingt-dix-huit","9023":"neuf mille vingt-trois","11982":"onze mille neuf cent quatre-vingt-deux","12943":"douze mille neuf cent quarante-trois","17934":"dix-sept mille neuf cent trente-quatre","18971":"dix-huit mille neuf cent soixante et onze","20190":"vingt mille cent quatre-vingt-dix","23789":"vingt-trois mille sept cent quatre-vingt-neuf","23980":"vingt-trois mille neuf cent quatre-vingts","38912":"trente-huit mille neuf cent douze","39472":"trente-neuf mille quatre cent soixante-douze","47653":"quarante-sept mille six cent cinquante-trois","48723":"quarante-huit mille sept cent vingt-trois","50239":"cinquante mille deux cent trente-neuf","56319":"cinquante-six mille trois cent dix-neuf","58392":"cinquante-huit mille trois cent quatre-vingt-douze","59182":"cinquante-neuf mille cent quatre-vingt-deux","65783":"soixante-cinq mille sept cent quatre-vingt-trois","69284":"soixante-neuf mille deux cent quatre-vingt-quatre","74092":"soixante-quatorze mille quatre-vingt-douze","78421":"soixante-dix-huit mille quatre cent vingt et un","78564":"soixante-dix-huit mille cinq cent soixante-quatre","82319":"quatre-vingt-deux mille trois cent dix-neuf","92458":"quatre-vingt-douze mille quatre cent cinquante-huit","93711":"quatre-vingt-treize mille sept cent onze","94028":"quatre-vingt-quatorze mille vingt-huit","98007":"quatre-vingt-dix-huit mille sept","98322":"quatre-vingt-dix-huit mille trois cent vingt-deux","98472":"quatre-vingt-dix-huit mille quatre cent soixante-douze","103902":"cent trois mille neuf cent deux","104523":"cent quatre mille cinq cent vingt-trois","189234":"cent quatre-vingt-neuf mille deux cent trente-quatre","193748":"cent quatre-vingt-treize mille sept cent quarante-huit","201349":"deux cent un mille trois cent quarante-neuf","209134":"deux cent neuf mille cent trente-quatre","248163":"deux cent quarante-huit mille cent soixante-trois","289634":"deux cent quatre-vingt-neuf mille six cent trente-quatre","295710":"deux cent quatre-vingt-quinze mille sept cent dix","301924":"trois cent un mille neuf cent vingt-quatre","340912":"trois cent quarante mille neuf cent douze","391085":"trois cent quatre-vingt-onze mille quatre-vingt-cinq","402873":"quatre cent deux mille huit cent soixante-treize","410293":"quatre cent dix mille deux cent quatre-vingt-treize","412057":"quatre cent douze mille cinquante-sept","450289":"quatre cent cinquante mille deux cent quatre-vingt-neuf","539201":"cinq cent trente-neuf mille deux cent un","675849":"six cent soixante-quinze mille huit cent quarante-neuf","728910":"sept cent vingt-huit mille neuf cent dix","734002":"sept cent trente-quatre mille deux","780003":"sept cent quatre-vingts mille trois","842763":"huit cent quarante-deux mille sept cent soixante-trois","903471":"neuf cent trois mille quatre cent soixante et onze","1192784":"un million cent quatre-vingt-dix-deux mille sept cent quatre-vingt-quatre","1264910":"un million deux cent soixante-quatre mille neuf cent dix","1302846":"un million trois cent deux mille huit cent quarante-six","1528427":"un million cinq cent vingt-huit mille quatre cent vingt-sept","1675901":"un million six cent soixante-quinze mille neuf cent un","5000000":"cinq millions"}}');
+module.exports = JSON.parse('{"easy":{"1":"Un","2":"Deux","3":"Trois","4":"Quatre","5":"Cinq","6":"Six","7":"Sept","8":"Huit","9":"Neuf","10":"Dix","11":"Onze","12":"Douze","13":"Treize","14":"Quatorze","15":"Quinze","16":"Seize","17":"Dix-sept","18":"Dix-huit","19":"Dix-neuf","20":"Vingt"},"intermediate":{"21":"Vingt et un","22":"Vingt-deux","23":"Vingt-trois","24":"Vingt-quatre","25":"Vingt-cinq","26":"Vingt-six","27":"Vingt-sept","28":"Vingt-huit","29":"Vingt-neuf","30":"Trente","31":"Trente et un","32":"Trente-deux","33":"Trente-trois","34":"Trente-quatre","35":"Trente-cinq","36":"Trente-six","37":"Trente-sept","38":"Trente-huit","39":"Trente-neuf","40":"Quarante","41":"Quarante et un","42":"Quarante-deux","43":"Quarante-trois","44":"Quarante-quatre","45":"Quarante-cinq","46":"Quarante-six","47":"Quarante-sept","48":"Quarante-huit","49":"Quarante-neuf","50":"Cinquante","51":"Cinquante et un","52":"Cinquante-deux","53":"Cinquante-trois","54":"Cinquante-quatre","55":"Cinquante-cinq","56":"Cinquante-six","57":"Cinquante-sept","58":"Cinquante-huit","59":"Cinquante-neuf","60":"Soixante","61":"Soixante et un","62":"Soixante-deux","63":"Soixante-trois","64":"Soixante-quatre","65":"Soixante-cinq","66":"Soixante-six","67":"Soixante-sept","68":"Soixante-huit","69":"Soixante-neuf","70":"Soixante-dix","71":"Soixante et onze","72":"Soixante-douze","73":"Soixante-treize","74":"Soixante-quatorze","75":"Soixante-quinze","76":"Soixante-seize","77":"Soixante-dix-sept","78":"Soixante-dix-huit","79":"Soixante-dix-neuf","80":"Quatre-vingts","81":"Quatre-vingt-un","82":"Quatre-vingt-deux","83":"Quatre-vingt-trois","84":"Quatre-vingt-quatre","85":"Quatre-vingt-cinq","86":"Quatre-vingt-six","87":"Quatre-vingt-sept","88":"Quatre-vingt-huit","89":"Quatre-vingt-neuf","90":"Quatre-vingt-dix","91":"Quatre-vingt-onze","92":"Quatre-vingt-douze","93":"Quatre-vingt-treize","94":"Quatre-vingt-quatorze","95":"Quatre-vingt-quinze","96":"Quatre-vingt-seize","97":"Quatre-vingt-dix-sept","98":"Quatre-vingt-dix-huit","99":"Quatre-vingt-dix-neuf"},"hard":{"100":"cent","128":"cent vingt-huit","136":"cent trente-six","145":"cent quarante-cinq","200":"deux cents","214":"deux cent quatorze","226":"deux cent vingt-six","267":"deux cent soixante-sept","307":"trois cent sept","330":"trois cent trente","341":"trois cent quarante et un","387":"trois cent quatre-vingt-sept","419":"quatre cent dix-neuf","423":"quatre cent vingt-trois","430":"quatre cent trente","482":"quatre cent quatre-vingt-deux","504":"cinq cent quatre","509":"cinq cent neuf","523":"cinq cent vingt-trois","591":"cinq cent quatre-vingt-onze","616":"six cent seize","643":"six cent quarante-trois","689":"six cent quatre-vingt-neuf","738":"sept cent trente-huit","756":"sept cent cinquante-six","762":"sept cent soixante-deux","795":"sept cent quatre-vingt-quinze","813":"huit cent treize","854":"huit cent cinquante-quatre","872":"huit cent soixante-douze","951":"neuf cent cinquante et un","962":"neuf cent soixante-deux","972":"neuf cent soixante-douze","1147":"mille cent quarante-sept","1150":"mille cent cinquante","1289":"mille deux cent quatre-vingt-neuf","1327":"mille trois cent vingt-sept","1453":"mille quatre cent cinquante-trois","1782":"mille sept cent quatre-vingt-deux","1809":"mille huit cent neuf","1875":"mille huit cent soixante-quinze","2091":"deux mille quatre-vingt-onze","2203":"deux mille deux cent trois","2274":"deux mille deux cent soixante-quatorze","2374":"deux mille trois cent soixante-quatorze","2491":"deux mille quatre cent quatre-vingt-onze","2569":"deux mille cinq cent soixante-neuf","2654":"deux mille six cent cinquante-quatre","2701":"deux mille sept cent un","2841":"deux mille huit cent quarante et un","3019":"trois mille dix-neuf","3192":"trois mille cent quatre-vingt-douze","3201":"trois mille deux cent un","3311":"trois mille trois cent onze","3482":"trois mille quatre cent quatre-vingt-deux","3829":"trois mille huit cent vingt-neuf","3985":"trois mille neuf cent quatre-vingt-cinq","4027":"quatre mille vingt-sept","4220":"quatre mille deux cent vingt","4401":"quatre mille quatre cent un","4567":"quatre mille cinq cent soixante-sept","4792":"quatre mille sept cent quatre-vingt-douze","4916":"quatre mille neuf cent seize","4931":"quatre mille neuf cent trente et un","4998":"quatre mille neuf cent quatre-vingt-dix-huit","9023":"neuf mille vingt-trois","11982":"onze mille neuf cent quatre-vingt-deux","12943":"douze mille neuf cent quarante-trois","17934":"dix-sept mille neuf cent trente-quatre","18971":"dix-huit mille neuf cent soixante et onze","20190":"vingt mille cent quatre-vingt-dix","23789":"vingt-trois mille sept cent quatre-vingt-neuf","23980":"vingt-trois mille neuf cent quatre-vingts","38912":"trente-huit mille neuf cent douze","39472":"trente-neuf mille quatre cent soixante-douze","47653":"quarante-sept mille six cent cinquante-trois","48723":"quarante-huit mille sept cent vingt-trois","50239":"cinquante mille deux cent trente-neuf","56319":"cinquante-six mille trois cent dix-neuf","58392":"cinquante-huit mille trois cent quatre-vingt-douze","59182":"cinquante-neuf mille cent quatre-vingt-deux","65783":"soixante-cinq mille sept cent quatre-vingt-trois","69284":"soixante-neuf mille deux cent quatre-vingt-quatre","74092":"soixante-quatorze mille quatre-vingt-douze","78421":"soixante-dix-huit mille quatre cent vingt et un","78564":"soixante-dix-huit mille cinq cent soixante-quatre","82319":"quatre-vingt-deux mille trois cent dix-neuf","92458":"quatre-vingt-douze mille quatre cent cinquante-huit","93711":"quatre-vingt-treize mille sept cent onze","94028":"quatre-vingt-quatorze mille vingt-huit","98007":"quatre-vingt-dix-huit mille sept","98322":"quatre-vingt-dix-huit mille trois cent vingt-deux","98472":"quatre-vingt-dix-huit mille quatre cent soixante-douze","103902":"cent trois mille neuf cent deux","104523":"cent quatre mille cinq cent vingt-trois","189234":"cent quatre-vingt-neuf mille deux cent trente-quatre","193748":"cent quatre-vingt-treize mille sept cent quarante-huit","201349":"deux cent un mille trois cent quarante-neuf","209134":"deux cent neuf mille cent trente-quatre","248163":"deux cent quarante-huit mille cent soixante-trois","289634":"deux cent quatre-vingt-neuf mille six cent trente-quatre","295710":"deux cent quatre-vingt-quinze mille sept cent dix","301924":"trois cent un mille neuf cent vingt-quatre","340912":"trois cent quarante mille neuf cent douze","391085":"trois cent quatre-vingt-onze mille quatre-vingt-cinq","402873":"quatre cent deux mille huit cent soixante-treize","410293":"quatre cent dix mille deux cent quatre-vingt-treize","412057":"quatre cent douze mille cinquante-sept","450289":"quatre cent cinquante mille deux cent quatre-vingt-neuf","539201":"cinq cent trente-neuf mille deux cent un","675849":"six cent soixante-quinze mille huit cent quarante-neuf","728910":"sept cent vingt-huit mille neuf cent dix","734002":"sept cent trente-quatre mille deux","780003":"sept cent quatre-vingts mille trois","842763":"huit cent quarante-deux mille sept cent soixante-trois","903471":"neuf cent trois mille quatre cent soixante et onze","1192784":"un million cent quatre-vingt-dix-deux mille sept cent quatre-vingt-quatre","1264910":"un million deux cent soixante-quatre mille neuf cent dix","1302846":"un million trois cent deux mille huit cent quarante-six","1528427":"un million cinq cent vingt-huit mille quatre cent vingt-sept","1675901":"un million six cent soixante-quinze mille neuf cent un","5000000":"cinq millions"}}');
 
 /***/ })
 

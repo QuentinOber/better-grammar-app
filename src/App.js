@@ -42,7 +42,7 @@ function App() {
         <Navigation />
         <Routes>
           <Route path="/find-number" element={<FindNumber />} />
-          <Route path="/games" element={<Home />} />
+          <Route path="/all-games" element={<Home />} />
           <Route path="/preposition" element={<Preposition />} />
         </Routes>
       </AppDispatch.Provider>

@@ -2,12 +2,13 @@
   margin: auto;
   .start-wrapper {
     h1 {
+      padding: 0 20px;
       text-align: center;
     }
     button {
       display: block;
       width: 300px;
-      margin: auto;
+      margin: 50px auto 100px;
     }
   }
   .select-level-wrapper {
@@ -19,15 +20,18 @@
       justify-content: center;
       flex-wrap: wrap;
     }
+    button {
+      width: 220px;
+    }
   }
 
   .wrapper-number-game {
-    border: 4px solid $mainBlue;
-    border-radius: 8px;
-    box-shadow: 2px 2px $mainBlue;
-    margin: 10px auto 20px;
+    margin: 10px auto 0px;
     padding: 20px 10px 30px;
     @include atBig {
+      border: 4px solid $mainBlue;
+      border-radius: 8px;
+      box-shadow: 2px 2px $mainBlue;
       padding-bottom: 80px;
     }
     .game-header {
@@ -39,19 +43,20 @@
       gap: 50px;
       font-size: 25px;
       font-weight: 500;
-      padding: 0 5px;
+      padding: 0;
       display: flex;
       justify-content: space-between;
     }
     .number {
-      font-size: 130px;
+      font-size: 95px;
       font-weight: 600;
       text-align: center;
-      margin: 0 0 10px 0;
+      margin: 20px 10px;
       text-shadow: 4px 4px $lightBlue;
       z-index: 100;
+      line-height: 100%;
       @include atBig {
-        margin: 0 0 50px 0;
+        margin: 0 0 40px 0;
         font-size: 150px;
       }
     }
@@ -64,10 +69,10 @@
       input[type='text'] {
         @include atBig {
           width: 500px;
-          font-size: 30px;
+          font-size: 25px;
         }
         width: 100%;
-        font-size: 25px;
+        font-size: 22px;
         height: 60px;
         padding: 10px;
         border: 4px solid $mainBlue;
@@ -94,10 +99,10 @@
     max-width: 450px;
     background-color: $lightBlue;
     border-radius: 5px;
-    padding: 20px 40px;
-    margin: 30px auto 20px;
+    padding: 20px 20px;
+    margin: 10px auto 20px;
     @include atBig {
-      margin-top: 70px auto 20px;
+      margin: 40px auto 20px;
     }
   }
 }

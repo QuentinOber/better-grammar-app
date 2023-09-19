@@ -1,6 +1,11 @@
 .nav-wrapper {
+  max-width: 900px;
+  margin: 0 auto 20px;
   display: flex;
   gap: 15px;
+  @include atBig {
+    margin: 0 auto 60px;
+  }
   button {
     background-color: white;
     color: $mainBlue;
@@ -12,6 +17,10 @@
     transition: all 0.3s ease-in-out;
     border: 1px solid $mainBlue;
     box-shadow: 0 0 0 0 $mainBlue;
+    &.selected {
+      background-color: $lightBlue;
+      color: $mainBlue;
+    }
   }
 
   button:hover {

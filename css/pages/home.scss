@@ -1,0 +1,137 @@
+.home-wrapper {
+  .games-selection {
+    margin: 40px auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    @include atBig {
+      justify-content: left;
+    }
+
+    .card {
+      word-break: normal;
+      --background: #fff;
+      --cardShadow: rgba(32, 33, 37, 0.1);
+      --cardShadowHover: rgba(32, 33, 37, 0.06);
+      --cardShadowActive: rgba(32, 33, 37, 0.55);
+      --cardBorder: #dbdce0;
+      --cardBorderActive: #1a73e8;
+      --textColor: #202125;
+      --linkColor: #1967d2;
+      --ratingColor: #faab00;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .card {
+        --background: #3c4043;
+        --cardShadow: rgba(0, 0, 0, 0.28);
+        --cardShadowHover: rgba(0, 0, 0, 0.16);
+        --cardShadowActive: rgba(0, 0, 0, 0.55);
+        --cardBorder: #202125;
+        --cardBorderActive: #8ab4f8;
+        --textColor: #e9eaee;
+        --linkColor: #8ab4f8;
+      }
+    }
+
+    .card {
+      width: 250px;
+      height: 350px;
+      aspect-ratio: 2/3;
+      background: var(--background);
+      color: var(--textColor);
+      border: 1px solid var(--cardBorder);
+      padding: 25px;
+      box-shadow: 8px 8px 0 var(--cardShadow);
+      transition: box-shadow 0.5s, transform 0.5s;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    .card:hover {
+      transform: translate(-2px, -4px);
+      box-shadow: 16px 16px 0 var(--cardShadowHover);
+    }
+
+    .card:active {
+      transform: translate(-2px, -4px);
+      border: 2px solid var(--cardBorderActive);
+      box-shadow: 4px 4px 0 var(--cardShadowActive);
+    }
+
+    .card > .icon,
+    .card > .title,
+    .card > .description {
+      margin-bottom: 0.7em;
+      cursor: default;
+      user-select: none;
+    }
+
+    .card > .title {
+      margin-top: 0.5em;
+      font-weight: bold;
+      color: $mainBlue;
+    }
+
+    .card > .description {
+      line-height: 1.5em;
+      min-height: 4em;
+    }
+
+    .card > .icon {
+      font-size: 3em;
+      margin-bottom: 0.2em;
+    }
+
+    .card > .rating {
+      font-size: 1.5em;
+      color: var(--ratingColor);
+      font-weight: bold;
+      position: relative;
+      width: max-content;
+    }
+
+    .card > .rating:before {
+      content: '☆☆☆☆☆';
+    }
+
+    .card > .rating:after {
+      content: '★★★★★';
+      position: absolute;
+      left: 0;
+      z-index: 0;
+      width: calc(var(--rating) * 1%);
+      overflow: hidden;
+    }
+
+    .card > .link {
+      margin-bottom: 1rem;
+      color: var(--linkColor);
+      font-size: 0.8em;
+      font-weight: 600;
+    }
+
+    /* Optional ~ Link the whole card */
+    .card > .link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .card > .link:after {
+      content: '↗';
+      display: inline-block;
+      margin-left: 0.3em;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover > .link:after {
+      transform: translate(0.2em, -0.2em);
+    }
+  }
+}

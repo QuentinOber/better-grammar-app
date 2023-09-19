@@ -1,15 +1,26 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 function Navigation() {
+  const location = useLocation()
+  const currentPath = location.pathname
+
   return (
     <div className="nav-wrapper">
-      <Link to="/games">
+      <Link to="/all-games">
         <button> ← Tous les jeux</button>
       </Link>
-      <Link to="/find-number">
-        <button>Les nombres</button>
-      </Link>
+      {currentPath === '/find-number' && (
+        <>
+          <button className="selected">Les nombres</button>
+        </>
+      )}
+
+      {currentPath === '/preposition' && (
+        <>
+          <button className="selected">Les prépositions</button>
+        </>
+      )}
     </div>
   )
 }

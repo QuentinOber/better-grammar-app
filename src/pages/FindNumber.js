@@ -11,6 +11,9 @@ import ScoreBoard from '../components/ScoreBoard'
 import SuccessSound from '../assets/SuccessSound.mp3'
 import FailedSound from '../assets/FailedSound.mp3'
 
+//hooks
+import { saveNumberResults } from '../hooks/SaveResults'
+
 function FindNumber() {
   const [randomNumber, setRandomNumber] = useState(null)
   const [timerKey, setTimerKey] = useState(0)
@@ -20,12 +23,10 @@ function FindNumber() {
   const [pointLostAnimation, setPointLostAnimation] = useState(false)
 
   const inputRef = useRef(true)
-  const timerRef = useRef(true) // useless?
 
   const initialState = {
-    hasClickedStarted: false,
-    isLevelVisible: false,
-    selectedLevel: 'easy',
+    isLevelVisible: true,
+    selectedLevel: '',
     isPlaying: false,
     isGameOver: false,
     hasTimerStated: false,
@@ -39,28 +40,32 @@ function FindNumber() {
 
   function numberReducer(draft, action) {
     switch (action.type) {
-      case 'start':
-        draft.hasClickedStarted = true
-        draft.isLevelVisible = true
-        return
       case 'selectLevel':
         draft.isLevelVisible = false
         draft.selectedLevel = action.value
         const newKeys = Object.keys(frenchNumbers[draft.selectedLevel])
         setKeys(newKeys)
         draft.isPlaying = true
+
         return
       case 'gameOver':
         draft.isGameOver = true
-        // draft.isGameOver = true
         draft.isPlaying = false
+        inputRef.current.value = ''
+        if (typeof user_status !== 'undefined') {
+          if (user_status.logged_in === '1') {
+            saveNumberResults(draft.userPoints, draft.selectedLevel)
+          }
+        }
         return
       case 'restartGame':
         Object.assign(draft, initialState)
         setTimerKey((prevKey) => prevKey + 1)
         return
       case 'checkAnswer':
-        if (action.value.replace(/\s+/g, '').toLowerCase() == randomNumber.value.replace(/\s+/g, '').toLowerCase()) {
+        if (
+          action.value.replace(/\s+|-/g, '').toLowerCase() == randomNumber.value.replace(/\s+|-/g, '').toLowerCase()
+        ) {
           const successAudio = new Audio(SuccessSound)
           successAudio.play()
           draft.foundNumbers.push(randomNumber.key)
@@ -91,6 +96,23 @@ function FindNumber() {
     }
   }
 
+  let howManyseconds = 30
+
+  switch (state.selectedLevel) {
+    case 'easy':
+      howManyseconds = 3
+      break
+    case 'intermediate':
+      howManyseconds = 60
+      break
+    case 'hard':
+      howManyseconds = 120
+      break
+    default:
+      howManyseconds = 20
+      break
+  }
+
   useEffect(() => {
     let selectedLevelNumbers = frenchNumbers[state.selectedLevel]
     let filteredKeys = []
@@ -100,32 +122,22 @@ function FindNumber() {
       filteredKeys = keys.filter((item) => !state.foundNumbers.includes(item) && !skippedNumbersKeys.includes(item))
     }
     inputRef.current.focus() // focus on the input from start
-    console.log('state.foundNumbers:', state.foundNumbers)
-    console.log('keys:', keys)
 
-    console.log(filteredKeys)
-
-    if (filteredKeys.length) {
-      const randomIndex = Math.floor(Math.random() * filteredKeys.length)
-      const randomKey = filteredKeys[randomIndex]
-      const randomValue = selectedLevelNumbers[randomKey]
-      setRandomNumber({ key: randomKey, value: randomValue })
-    } else {
-      dispatch({ type: 'gameOver' })
+    if (state.isPlaying) {
+      if (filteredKeys.length) {
+        const randomIndex = Math.floor(Math.random() * filteredKeys.length)
+        const randomKey = filteredKeys[randomIndex]
+        const randomValue = selectedLevelNumbers[randomKey]
+        setRandomNumber({ key: randomKey, value: randomValue })
+      } else {
+        dispatch({ type: 'gameOver' })
+      }
     }
   }, [state.foundNumbers, state.skippedNumbers, keys])
-
-  console.log(state)
 
   return (
     <PageLayout>
       <div className="game-wrapper">
-        <div className={state.hasClickedStarted ? 'hide' : 'start-wrapper'}>
-          <h1>Write the correct number in French</h1>
-          <button onClick={() => dispatch({ type: 'start' })} class="game-button">
-            Start now!
-          </button>
-        </div>
         <div className={state.isLevelVisible ? 'select-level-wrapper' : 'hide'}>
           <h1>Sélectionne ton niveau</h1>
           <div className="levels">
@@ -135,7 +147,7 @@ function FindNumber() {
             <button className="game-button" onClick={() => dispatch({ type: 'selectLevel', value: 'intermediate' })}>
               Intermédiaire
             </button>
-            <button className="game-button" onClick={() => dispatch({ type: 'selectLevel', value: 'advanced' })}>
+            <button className="game-button" onClick={() => dispatch({ type: 'selectLevel', value: 'hard' })}>
               Avancé
             </button>
           </div>
@@ -145,9 +157,8 @@ function FindNumber() {
           <div className="game-header">
             {state.isPlaying ? (
               <Timer
-                ref={timerRef}
                 key={timerKey}
-                howManySeconds={20}
+                howManyseconds={howManyseconds}
                 onGameOver={() => {
                   dispatch({ type: 'gameOver' })
                 }}
@@ -163,7 +174,7 @@ function FindNumber() {
           </div>
           <div className="number-frame">
             <p className={`number ${shouldBounce ? 'bounce confetti' : ''}`}>
-              {randomNumber ? randomNumber.key : '...'}
+              {randomNumber ? randomNumber.key.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '...'}
             </p>
 
             <div className="game-actions">
@@ -188,14 +199,14 @@ function FindNumber() {
             onRestartGame={() => {
               dispatch({ type: 'restartGame' })
             }}
+            isGameOver={state.isGameOver}
+            level={state.selectedLevel}
           />
         </div>
 
         <div className={Object.keys(state.skippedNumbers).length > 0 ? 'missed-numbers' : 'hide'}>
           <span className="main-highlight">
-            {Object.keys(state.skippedNumbers).length > 1
-              ? 'Nombres loupés (missed numbers) :'
-              : 'Nombre loupé (missed number) :'}
+            {Object.keys(state.skippedNumbers).length > 1 ? 'Nombres loupés :' : 'Nombre loupé :'}
           </span>
           <ul>
             {Object.entries(state.skippedNumbers).map(([key, value]) => {

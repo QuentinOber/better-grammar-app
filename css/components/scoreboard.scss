@@ -1,4 +1,6 @@
 .scoreboard-wrapper {
+  max-width: 600px;
+  margin: 10px auto 80px;
   h2 {
     text-align: center;
     font-size: 35px;
@@ -23,5 +25,29 @@
     display: flex;
     size: 30px;
     align-items: center;
+  }
+  .score-table {
+    color: $mainBlue;
+    width: 100%;
+    border-collapse: collapse;
+    border: 4px solid $mainBlue;
+    border-radius: 5px;
+    box-shadow: 2px 2px $mainBlue;
+  }
+
+  .score-table th,
+  .score-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .score-table th {
+    background-color: $mainBlue;
+    color: white;
+  }
+
+  .score-table tr:nth-child(even) {
+    background-color: $lightBlue;
   }
 }
