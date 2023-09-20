@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import LoginBanner from './LoginBanner'
 import { formatDate } from '../hooks/DateFormat'
 

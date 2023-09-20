@@ -1,7 +1,5 @@
-import React, { useEffect, useContext, useState, useRef } from 'react'
+import { useEffect, useContext, useState, useRef } from 'react'
 import PageLayout from '../components/PageLayout'
-import AppContext from '../data/AppContext'
-import AppDispatch from '../data/AppDispatch'
 import { useImmerReducer } from 'use-immer'
 import frenchNumbers from '../data/FrenchNumbers.json'
 
@@ -17,7 +15,6 @@ import { saveNumberResults } from '../hooks/SaveResults'
 function FindNumber() {
   const [randomNumber, setRandomNumber] = useState(null)
   const [timerKey, setTimerKey] = useState(0)
-
   const [shouldBounce, setShouldBounce] = useState(false)
   const [pointWinnedAnimation, setPointWinnedAnimation] = useState(false)
   const [pointLostAnimation, setPointLostAnimation] = useState(false)
@@ -46,16 +43,13 @@ function FindNumber() {
         const newKeys = Object.keys(frenchNumbers[draft.selectedLevel])
         setKeys(newKeys)
         draft.isPlaying = true
-
         return
       case 'gameOver':
         draft.isGameOver = true
         draft.isPlaying = false
         inputRef.current.value = ''
-        if (typeof user !== 'undefined') {
-          if (user.logged_in === '1') {
-            saveNumberResults(draft.userPoints, draft.selectedLevel)
-          }
+        if (user && user.logged_in === '1') {
+          saveNumberResults(draft.userPoints, draft.selectedLevel)
         }
         return
       case 'restartGame':
@@ -135,21 +129,19 @@ function FindNumber() {
     }
   }, [state.foundNumbers, state.skippedNumbers, keys])
 
+  const allLevels = { easy: 'Facile', intermediate: 'Intermédiare', hard: 'Difficile' }
+
   return (
     <PageLayout>
       <div className="game-wrapper">
         <div className={state.isLevelVisible ? 'select-level-wrapper' : 'hide'}>
           <h1>Sélectionne ton niveau</h1>
           <div className="levels">
-            <button className="game-button" onClick={() => dispatch({ type: 'selectLevel', value: 'easy' })}>
-              Facile
-            </button>
-            <button className="game-button" onClick={() => dispatch({ type: 'selectLevel', value: 'intermediate' })}>
-              Intermédiaire
-            </button>
-            <button className="game-button" onClick={() => dispatch({ type: 'selectLevel', value: 'hard' })}>
-              Avancé
-            </button>
+            {Object.keys(allLevels).map((key) => (
+              <button key={key} className="game-button" onClick={() => dispatch({ type: 'selectLevel', value: key })}>
+                {allLevels[key]}
+              </button>
+            ))}
           </div>
         </div>
 
@@ -211,7 +203,7 @@ function FindNumber() {
           <ul>
             {Object.entries(state.skippedNumbers).map(([key, value]) => {
               return (
-                <li>
+                <li key={key}>
                   <span className="main-highlight">{key}</span> : {value}
                 </li>
               )

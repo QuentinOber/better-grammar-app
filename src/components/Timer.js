@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function Timer({ howManyseconds, onGameOver }) {
   const [counter, setCounter] = useState(howManyseconds)
@@ -6,7 +6,7 @@ function Timer({ howManyseconds, onGameOver }) {
   useEffect(() => {
     let timer
     if (counter > 0) {
-      timer = setTimeout(() => setCounter(counter - 1), 1000)
+      timer = setTimeout(() => setCounter((prevCounter) => prevCounter - 1), 1000)
     } else {
       console.log('Game Over Triggered')
       onGameOver() // Call the callback function when the timer reaches zero

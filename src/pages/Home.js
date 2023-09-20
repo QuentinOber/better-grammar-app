@@ -1,8 +1,8 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import PageLayout from '../components/PageLayout'
 import LoginBanner from '../components/LoginBanner'
 
+// to optimize when more games are created
 function Home() {
   let isLoggedIn = false
 
@@ -21,9 +21,7 @@ function Home() {
               <div className="title">Les nombres, des maths ?</div>
               <p className="description">Retrouve les bons nombres, le plus rapidemment possible...</p>
               <div className="rating"></div>
-              <a href="#" className="link">
-                Jouer
-              </a>
+              <span className="link">Jouer</span>
             </div>
           </Link>
           <Link to="/preposition">
@@ -32,9 +30,7 @@ function Home() {
               <div className="title">Les prépositions (à, de, pour...)</div>
               <p className="description">Retrouve les bonnes prépositions, dans différents contextes...</p>
               <div className="rating"></div>
-              <a href="#" className="link">
-                Jouer
-              </a>
+              <span className="link">Jouer</span>
             </div>
           </Link>
         </div>

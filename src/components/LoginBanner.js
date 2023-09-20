@@ -1,5 +1,3 @@
-import React, { useEffect } from 'react'
-
 function LoginBanner() {
   let loginUrl = '#'
   if (user.login_url) {
