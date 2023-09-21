@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useContext } from 'react'
 import PageLayout from '../components/PageLayout'
 import { useImmerReducer } from 'use-immer'
 import frenchNumbers from '../data/FrenchNumbers.json'
@@ -19,6 +19,8 @@ function FindNumber() {
   const [pointWinnedAnimation, setPointWinnedAnimation] = useState(false)
   const [pointLostAnimation, setPointLostAnimation] = useState(false)
 
+  const [isSavedDone, setIsSavedDone] = useState(false)
+
   const inputRef = useRef(true)
 
   const initialState = {
@@ -30,6 +32,7 @@ function FindNumber() {
     foundNumbers: [],
     skippedNumbers: {},
     userPoints: 0,
+    isSavedDone: false,
   }
 
   const [keys, setKeys] = useState([])
@@ -50,6 +53,15 @@ function FindNumber() {
         inputRef.current.value = ''
         if (user && user.logged_in === '1') {
           saveNumberResults(draft.userPoints, draft.selectedLevel)
+            .then(() => {
+              setIsSavedDone(true)
+            })
+            .catch((error) => {
+              console.error('An error occurred:', error)
+              setIsSavedDone(true)
+            })
+        } else {
+          setIsSavedDone(true)
         }
         return
       case 'restartGame':
@@ -94,7 +106,7 @@ function FindNumber() {
 
   switch (state.selectedLevel) {
     case 'easy':
-      howManyseconds = 30
+      howManyseconds = 8
       break
     case 'intermediate':
       howManyseconds = 60
@@ -191,7 +203,7 @@ function FindNumber() {
             onRestartGame={() => {
               dispatch({ type: 'restartGame' })
             }}
-            isGameOver={state.isGameOver}
+            isSavedDone={isSavedDone}
             level={state.selectedLevel}
           />
         </div>

@@ -1,52 +1,32 @@
 import { useEffect, useState } from 'react'
 import LoginBanner from './LoginBanner'
 import { formatDate } from '../hooks/DateFormat'
+import useFetch from '../hooks/useFetch'
 
-function ScoreBoard({ onRestartGame, userPoints, isGameOver, level }) {
+function ScoreBoard({ onRestartGame, userPoints, isSavedDone, level }) {
   let isLoggedIn = false
-
-  const [topScores, setTopScores] = useState([])
-  const [myScores, setMyScores] = useState([])
-
   if (typeof user !== 'undefined') {
     isLoggedIn = user.logged_in === '1'
   }
 
+  let urlMyTopScores
+  isLoggedIn ? (urlMyTopScores = `/wp-json/better-grammar/v1/find_number_top_5/${level}`) : (urlMyTopScores = null)
+
+  const [topScores, setTopScores] = useState(null)
+  const [myScores, setMyScores] = useState(null)
+
+  const { data: topScoresData } = useFetch(`/wp-json/better-grammar/v1/find_number_top_15/${level}`, isSavedDone)
+  const { data: myScoresData } = useFetch(urlMyTopScores, isSavedDone)
+
   useEffect(() => {
-    const apiTopUrl = `/wp-json/better-grammar/v1/find_number_top_15/${level}`
-
-    const fetchTopScores = () => {
-      fetch(apiTopUrl)
-        .then((response) => response.json())
-        .then((data) => setTopScores(data))
-        .catch((error) => console.error('Error fetching data:', error))
+    if (Array.isArray(topScoresData)) {
+      setTopScores(topScoresData)
     }
 
-    const apiMyScoresUrl = `/wp-json/better-grammar/v1/find_number_top_5/${level}`
-
-    const nonce = wpApiSettings.nonce
-    const fetchMyScores = () => {
-      if (isLoggedIn) {
-        fetch(apiMyScoresUrl, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-WP-Nonce': nonce,
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => setMyScores(data))
-          .catch((error) => console.error('Error fetching my top 5 scores:', error))
-      } else {
-        return
-      }
+    if (Array.isArray(myScoresData)) {
+      setMyScores(myScoresData)
     }
-
-    if (isGameOver) {
-      setTimeout(fetchTopScores, 2000) // 2-second delay
-      setTimeout(fetchMyScores, 2000)
-    }
-  }, [isGameOver])
+  }, [topScoresData, myScoresData])
 
   return (
     <div className="scoreboard-wrapper">
@@ -82,7 +62,7 @@ function ScoreBoard({ onRestartGame, userPoints, isGameOver, level }) {
               </tr>
             </thead>
             <tbody>
-              {myScores.length > 0 &&
+              {myScores &&
                 myScores.map((score, index) => (
                   <tr key={index}>
                     <td>
@@ -106,18 +86,19 @@ function ScoreBoard({ onRestartGame, userPoints, isGameOver, level }) {
           </tr>
         </thead>
         <tbody>
-          {topScores.map((score, index) => (
-            <tr key={index}>
-              <td>
-                <span className="main-highlight">{score.game_results}</span>
-              </td>
+          {topScores &&
+            topScores.map((score, index) => (
+              <tr key={index}>
+                <td>
+                  <span className="main-highlight">{score.game_results}</span>
+                </td>
 
-              <td>
-                <span className="main-highlight">{score.username}</span>
-              </td>
-              <td>{index + 1}</td>
-            </tr>
-          ))}
+                <td>
+                  <span className="main-highlight">{score.username}</span>
+                </td>
+                <td>{index + 1}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

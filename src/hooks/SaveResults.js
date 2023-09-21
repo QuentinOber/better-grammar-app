@@ -5,7 +5,7 @@ export function saveNumberResults(userPoints, selectedLevel) {
   }
   const nonce = wpApiSettings.nonce
 
-  fetch('/wp-json/better-grammar/v1/add_find_number_result', {
+  return fetch('/wp-json/better-grammar/v1/add_find_number_result', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -13,11 +13,18 @@ export function saveNumberResults(userPoints, selectedLevel) {
     },
     body: JSON.stringify(data),
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
+      }
+      return response.json()
+    })
     .then((data) => {
       console.log('Success:', data)
+      return data
     })
     .catch((error) => {
       console.error('Error:', error)
+      throw error
     })
 }

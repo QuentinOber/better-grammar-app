@@ -8,7 +8,6 @@ function Timer({ howManyseconds, onGameOver }) {
     if (counter > 0) {
       timer = setTimeout(() => setCounter((prevCounter) => prevCounter - 1), 1000)
     } else {
-      console.log('Game Over Triggered')
       onGameOver() // Call the callback function when the timer reaches zero
     }
 

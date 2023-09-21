@@ -4303,6 +4303,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _LoginBanner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LoginBanner */ "./src/components/LoginBanner.js");
 /* harmony import */ var _hooks_DateFormat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/DateFormat */ "./src/hooks/DateFormat.js");
+/* harmony import */ var _hooks_useFetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useFetch */ "./src/hooks/useFetch.js");
+
 
 
 
@@ -4310,40 +4312,31 @@ __webpack_require__.r(__webpack_exports__);
 function ScoreBoard({
   onRestartGame,
   userPoints,
-  isGameOver,
+  isSavedDone,
   level
 }) {
   let isLoggedIn = false;
-  const [topScores, setTopScores] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
-  const [myScores, setMyScores] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   if (typeof user !== 'undefined') {
     isLoggedIn = user.logged_in === '1';
   }
+  let urlMyTopScores;
+  isLoggedIn ? urlMyTopScores = `/wp-json/better-grammar/v1/find_number_top_5/${level}` : urlMyTopScores = null;
+  const [topScores, setTopScores] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  const [myScores, setMyScores] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  const {
+    data: topScoresData
+  } = (0,_hooks_useFetch__WEBPACK_IMPORTED_MODULE_4__["default"])(`/wp-json/better-grammar/v1/find_number_top_15/${level}`, isSavedDone);
+  const {
+    data: myScoresData
+  } = (0,_hooks_useFetch__WEBPACK_IMPORTED_MODULE_4__["default"])(urlMyTopScores, isSavedDone);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    const apiTopUrl = `/wp-json/better-grammar/v1/find_number_top_15/${level}`;
-    const fetchTopScores = () => {
-      fetch(apiTopUrl).then(response => response.json()).then(data => setTopScores(data)).catch(error => console.error('Error fetching data:', error));
-    };
-    const apiMyScoresUrl = `/wp-json/better-grammar/v1/find_number_top_5/${level}`;
-    const nonce = wpApiSettings.nonce;
-    const fetchMyScores = () => {
-      if (isLoggedIn) {
-        fetch(apiMyScoresUrl, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-WP-Nonce': nonce
-          }
-        }).then(response => response.json()).then(data => setMyScores(data)).catch(error => console.error('Error fetching my top 5 scores:', error));
-      } else {
-        return;
-      }
-    };
-    if (isGameOver) {
-      setTimeout(fetchTopScores, 2000); // 2-second delay
-      setTimeout(fetchMyScores, 2000);
+    if (Array.isArray(topScoresData)) {
+      setTopScores(topScoresData);
     }
-  }, [isGameOver]);
+    if (Array.isArray(myScoresData)) {
+      setMyScores(myScoresData);
+    }
+  }, [topScoresData, myScoresData]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "scoreboard-wrapper"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "C'est termin\xE9 !"), isLoggedIn ? null : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_LoginBanner__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -4366,13 +4359,13 @@ function ScoreBoard({
     d: "M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"
   })), "Nouveau Jeu"), isLoggedIn && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "\uD83C\uDFC6 Mes meilleurs scores"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", {
     className: "score-table"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Points"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Date"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, myScores.length > 0 && myScores.map((score, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Points"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Date"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, myScores && myScores.map((score, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
     key: index
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "main-highlight"
   }, score.game_results)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_hooks_DateFormat__WEBPACK_IMPORTED_MODULE_3__.formatDate)(score.result_date))))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "\uD83D\uDCAA Les meilleurs "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", {
     className: "score-table"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Points"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Joueur"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Rang"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, topScores.map((score, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Points"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Joueur"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, "Rang"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, topScores && topScores.map((score, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
     key: index
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "main-highlight"
@@ -4405,7 +4398,7 @@ function Timer({
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let timer;
     if (counter > 0) {
-      timer = setTimeout(() => setCounter(counter - 1), 1000);
+      timer = setTimeout(() => setCounter(prevCounter => prevCounter - 1), 1000);
     } else {
       console.log('Game Over Triggered');
       onGameOver(); // Call the callback function when the timer reaches zero
@@ -4493,19 +4486,76 @@ function saveNumberResults(userPoints, selectedLevel) {
     game_level: selectedLevel
   };
   const nonce = wpApiSettings.nonce;
-  fetch('/wp-json/better-grammar/v1/add_find_number_result', {
+  return fetch('/wp-json/better-grammar/v1/add_find_number_result', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'X-WP-Nonce': nonce
     },
     body: JSON.stringify(data)
-  }).then(response => response.json()).then(data => {
+  }).then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  }).then(data => {
     console.log('Success:', data);
+    return data;
   }).catch(error => {
     console.error('Error:', error);
+    throw error;
   });
 }
+
+/***/ }),
+
+/***/ "./src/hooks/useFetch.js":
+/*!*******************************!*\
+  !*** ./src/hooks/useFetch.js ***!
+  \*******************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+// added the shouldFetch for asynchronous (like waiting for the results to be saved before displaying score board)
+function useFetch(url, shouldFetch = true) {
+  const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [error, setError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!shouldFetch) return;
+    if (!url) {
+      return;
+    }
+    const nonce = wpApiSettings?.nonce || '';
+    if (!nonce) {
+      console.error('Nonce is missing');
+      return;
+    }
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-WP-Nonce': nonce
+      }
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    }).then(json => setData(json)).catch(error => {
+      console.error('Error fetching data:', error);
+      setError(error);
+    });
+  }, [url, shouldFetch]);
+  return {
+    data,
+    error
+  };
+}
+/* harmony default export */ __webpack_exports__["default"] = (useFetch);
 
 /***/ }),
 
@@ -4548,6 +4598,7 @@ function FindNumber() {
   const [shouldBounce, setShouldBounce] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [pointWinnedAnimation, setPointWinnedAnimation] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [pointLostAnimation, setPointLostAnimation] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [isSavedDone, setIsSavedDone] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const inputRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(true);
   const initialState = {
     isLevelVisible: true,
@@ -4557,7 +4608,8 @@ function FindNumber() {
     hasTimerStated: false,
     foundNumbers: [],
     skippedNumbers: {},
-    userPoints: 0
+    userPoints: 0,
+    isSavedDone: false
   };
   const [keys, setKeys] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   const [state, dispatch] = (0,use_immer__WEBPACK_IMPORTED_MODULE_9__.useImmerReducer)(numberReducer, initialState);
@@ -4575,7 +4627,14 @@ function FindNumber() {
         draft.isPlaying = false;
         inputRef.current.value = '';
         if (user && user.logged_in === '1') {
-          (0,_hooks_SaveResults__WEBPACK_IMPORTED_MODULE_8__.saveNumberResults)(draft.userPoints, draft.selectedLevel);
+          (0,_hooks_SaveResults__WEBPACK_IMPORTED_MODULE_8__.saveNumberResults)(draft.userPoints, draft.selectedLevel).then(() => {
+            setIsSavedDone(true);
+          }).catch(error => {
+            console.error('An error occurred:', error);
+            setIsSavedDone(true);
+          });
+        } else {
+          setIsSavedDone(true);
         }
         return;
       case 'restartGame':
@@ -4615,7 +4674,7 @@ function FindNumber() {
   let howManyseconds = 30;
   switch (state.selectedLevel) {
     case 'easy':
-      howManyseconds = 30;
+      howManyseconds = 8;
       break;
     case 'intermediate':
       howManyseconds = 60;
@@ -4715,7 +4774,7 @@ function FindNumber() {
         type: 'restartGame'
       });
     },
-    isGameOver: state.isGameOver,
+    isSavedDone: isSavedDone,
     level: state.selectedLevel
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: Object.keys(state.skippedNumbers).length > 0 ? 'missed-numbers' : 'hide'
