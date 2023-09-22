@@ -18,7 +18,7 @@ function FindNumber() {
   const [shouldBounce, setShouldBounce] = useState(false)
   const [pointWinnedAnimation, setPointWinnedAnimation] = useState(false)
   const [pointLostAnimation, setPointLostAnimation] = useState(false)
-  const [gameDurationInSec, setGameDurationInSec] = useState(30)
+  const [gameDurationInSec, setGameDurationInSec] = useState(null)
 
   const [isSavedDone, setIsSavedDone] = useState(false)
 
@@ -39,11 +39,26 @@ function FindNumber() {
   const [keys, setKeys] = useState([])
   const [state, dispatch] = useImmerReducer(numberReducer, initialState)
 
+  console.log(state)
+
   function numberReducer(draft, action) {
     switch (action.type) {
       case 'selectLevel':
         draft.isLevelVisible = false
         draft.selectedLevel = action.value
+        switch (action.value) {
+          case 'easy':
+            setGameDurationInSec(30)
+            break
+          case 'intermediate':
+            setGameDurationInSec(60)
+            break
+          case 'hard':
+            setGameDurationInSec(120)
+            break
+          default:
+            setGameDurationInSec(30)
+        }
         const newKeys = Object.keys(frenchNumbers[draft.selectedLevel])
         setKeys(newKeys)
         draft.isPlaying = true
@@ -102,22 +117,6 @@ function FindNumber() {
         return draft
     }
   }
-
-  useEffect(() => {
-    switch (state.selectedLevel) {
-      case 'easy':
-        setGameDurationInSec(30)
-        break
-      case 'intermediate':
-        setGameDurationInSec(60)
-        break
-      case 'hard':
-        setGameDurationInSec(120)
-        break
-      default:
-        setGameDurationInSec(30)
-    }
-  }, [state.selectedLevel])
 
   useEffect(() => {
     let selectedLevelNumbers = frenchNumbers[state.selectedLevel]
