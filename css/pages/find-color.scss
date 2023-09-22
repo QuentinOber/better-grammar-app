@@ -1,0 +1,75 @@
+/* base styles */
+.find-color-wrapper {
+  margin: 0;
+  font-size: 1.2em;
+  text-align: center;
+  .card-grid {
+    max-width: 300px;
+    margin: 30px auto;
+    display: grid;
+    grid-gap: 4px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    @include atBig {
+      max-width: 600px;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      grid-gap: 10px;
+    }
+    .card {
+      .flipped .front {
+        transform: rotateY(0deg);
+        transition-delay: 0.2s;
+      }
+      .front {
+        position: absolute;
+        transform: rotateY(90deg);
+        transition: all ease-in 0.2s;
+        height: 70px;
+        width: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        font-size: 17px;
+        font-weight: 500;
+        border-radius: 8px;
+        @include atBig {
+          font-size: 25px;
+          height: 120px;
+          width: 120px;
+        }
+      }
+      .back {
+        background-color: $mediumBlue;
+        height: 70px;
+        width: 70px;
+        font-size: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        transition: all ease-in 0.2s;
+        transition-delay: 0.2s;
+        cursor: pointer;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        @include atBig {
+          font-size: 60px;
+          height: 120px;
+          width: 120px;
+        }
+      }
+      .flipped .back {
+        transform: rotateY(90deg);
+        transition-delay: 0s;
+      }
+    }
+  }
+  .game-footer {
+    margin: auto;
+
+    button {
+      font-size: 18px;
+    }
+  }
+}

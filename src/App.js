@@ -10,6 +10,7 @@ import Navigation from './components/Navigation'
 import Home from './pages/Home'
 import FindNumber from './pages/FindNumber'
 import Preposition from './pages/Preposition'
+import FindColor from './pages/FindColor'
 
 function App() {
   const initialState = {
@@ -29,7 +30,7 @@ function App() {
         draft.loggedIn = false
         return
       case 'test':
-        draft.test = 'Hello'
+        draft.test = 'test'
         return
       default:
         return draft
@@ -42,8 +43,9 @@ function App() {
         <Navigation />
         <Routes>
           <Route path="/find-number" element={<FindNumber />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/find-color" element={<FindColor />} />
           <Route path="/preposition" element={<Preposition />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </AppDispatch.Provider>
     </AppContext.Provider>

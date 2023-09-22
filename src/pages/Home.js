@@ -24,6 +24,15 @@ function Home() {
               <span className="link">Jouer</span>
             </div>
           </Link>
+          <Link to="/find-color">
+            <div className="card" style={{ '--rating': 90 }}>
+              <div className="icon">🦄</div>
+              <div className="title">Les couleurs et la mémoire</div>
+              <p className="description">Travaille ta mémoire, et tes couleurs !</p>
+              <div className="rating"></div>
+              <span className="link">Jouer</span>
+            </div>
+          </Link>
           <Link to="/preposition">
             <div className="card" style={{ '--rating': 0 }}>
               <div className="icon">🔜</div>

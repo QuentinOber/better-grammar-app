@@ -7,13 +7,9 @@
     margin: 0 auto 30px;
   }
   button {
-    background-color: white;
-    color: $mainBlue;
-    border-radius: 10em;
     font-size: 17px;
     font-weight: 600;
     padding: 0.5em 0.8em;
-    cursor: pointer;
     transition: all 0.3s ease-in-out;
     border: 1px solid $mainBlue;
     box-shadow: 0 0 0 0 $mainBlue;

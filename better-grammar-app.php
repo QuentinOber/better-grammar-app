@@ -44,6 +44,6 @@ function enqueue_bettergrammarapp_scripts() {
 add_action('wp_enqueue_scripts', 'enqueue_bettergrammarapp_scripts', 99);
 
 function better_grammar_shortcode() {
-	return '<div id="better-grammar-app"></div>';
+	return '<div id="better-grammar-app" class="better-grammar-app"></div>';
 }
 add_shortcode('better_grammar', 'better_grammar_shortcode'); 

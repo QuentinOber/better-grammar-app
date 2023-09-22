@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef, useContext } from 'react'
 import PageLayout from '../components/PageLayout'
 import { useImmerReducer } from 'use-immer'
-import frenchNumbers from '../data/FrenchNumbers.json'
 
 //components
+import frenchNumbers from '../data/FrenchNumbers.json'
 import Timer from '../components/timer'
 import ScoreBoard from '../components/ScoreBoard'
 import SuccessSound from '../assets/SuccessSound.mp3'
@@ -18,6 +18,7 @@ function FindNumber() {
   const [shouldBounce, setShouldBounce] = useState(false)
   const [pointWinnedAnimation, setPointWinnedAnimation] = useState(false)
   const [pointLostAnimation, setPointLostAnimation] = useState(false)
+  const [gameDurationInSec, setGameDurationInSec] = useState(30)
 
   const [isSavedDone, setIsSavedDone] = useState(false)
 
@@ -102,22 +103,21 @@ function FindNumber() {
     }
   }
 
-  let howManyseconds = 30
-
-  switch (state.selectedLevel) {
-    case 'easy':
-      howManyseconds = 8
-      break
-    case 'intermediate':
-      howManyseconds = 60
-      break
-    case 'hard':
-      howManyseconds = 120
-      break
-    default:
-      howManyseconds = 20
-      break
-  }
+  useEffect(() => {
+    switch (state.selectedLevel) {
+      case 'easy':
+        setGameDurationInSec(30)
+        break
+      case 'intermediate':
+        setGameDurationInSec(60)
+        break
+      case 'hard':
+        setGameDurationInSec(120)
+        break
+      default:
+        setGameDurationInSec(30)
+    }
+  }, [state.selectedLevel])
 
   useEffect(() => {
     let selectedLevelNumbers = frenchNumbers[state.selectedLevel]
@@ -145,7 +145,7 @@ function FindNumber() {
 
   return (
     <PageLayout>
-      <div className="game-wrapper">
+      <div className="find-number-wrapper">
         <div className={state.isLevelVisible ? 'select-level-wrapper' : 'hide'}>
           <h1>Sélectionne ton niveau</h1>
           <div className="levels">
@@ -162,7 +162,7 @@ function FindNumber() {
             {state.isPlaying ? (
               <Timer
                 key={timerKey}
-                howManyseconds={howManyseconds}
+                howManyseconds={gameDurationInSec}
                 onGameOver={() => {
                   dispatch({ type: 'gameOver' })
                 }}

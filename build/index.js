@@ -4100,14 +4100,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_styles_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../css/styles.scss */ "./css/styles.scss");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var use_immer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! use-immer */ "./node_modules/use-immer/dist/use-immer.module.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var use_immer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! use-immer */ "./node_modules/use-immer/dist/use-immer.module.js");
 /* harmony import */ var _data_AppContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./data/AppContext */ "./src/data/AppContext.js");
 /* harmony import */ var _data_AppDispatch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./data/AppDispatch */ "./src/data/AppDispatch.js");
 /* harmony import */ var _components_Navigation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Navigation */ "./src/components/Navigation.js");
 /* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Home */ "./src/pages/Home.js");
 /* harmony import */ var _pages_FindNumber__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/FindNumber */ "./src/pages/FindNumber.js");
 /* harmony import */ var _pages_Preposition__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/Preposition */ "./src/pages/Preposition.js");
+/* harmony import */ var _pages_FindColor__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/FindColor */ "./src/pages/FindColor.js");
 
 
 
@@ -4121,13 +4122,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function App() {
   const initialState = {
     test: 'coucou',
     loggedIn: false,
     selectedLevel: null
   };
-  const [state, dispatch] = (0,use_immer__WEBPACK_IMPORTED_MODULE_9__.useImmerReducer)(appReducer, initialState);
+  const [state, dispatch] = (0,use_immer__WEBPACK_IMPORTED_MODULE_10__.useImmerReducer)(appReducer, initialState);
   function appReducer(draft, action) {
     switch (action.type) {
       case 'login':
@@ -4137,7 +4139,7 @@ function App() {
         draft.loggedIn = false;
         return;
       case 'test':
-        draft.test = 'Hello';
+        draft.test = 'test';
         return;
       default:
         return draft;
@@ -4147,15 +4149,18 @@ function App() {
     value: state
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_data_AppDispatch__WEBPACK_IMPORTED_MODULE_4__["default"].Provider, {
     value: dispatch
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Navigation__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Routes, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Navigation__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Routes, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
     path: "/find-number",
     element: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_FindNumber__WEBPACK_IMPORTED_MODULE_7__["default"], null)
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
-    path: "/",
-    element: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_Home__WEBPACK_IMPORTED_MODULE_6__["default"], null)
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    path: "/find-color",
+    element: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_FindColor__WEBPACK_IMPORTED_MODULE_9__["default"], null)
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
     path: "/preposition",
     element: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_Preposition__WEBPACK_IMPORTED_MODULE_8__["default"], null)
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    path: "/",
+    element: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_pages_Home__WEBPACK_IMPORTED_MODULE_6__["default"], null)
   }))));
 }
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -4257,15 +4262,19 @@ __webpack_require__.r(__webpack_exports__);
 function Navigation() {
   const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useLocation)();
   const currentPath = location.pathname;
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "nav-wrapper"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    to: "/"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", null, " \u2190 Tous les jeux")), currentPath === '/find-number' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: "selected"
-  }, "Les nombres")), currentPath === '/preposition' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: "selected"
-  }, "Les pr\xE9positions")));
+  if (currentPath === '/') return;else {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "nav-wrapper"
+    }, currentPath === '/' ? '' : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      to: "/"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", null, " \u2190 Tous les jeux")), currentPath === '/find-number' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      className: "selected"
+    }, "Les nombres")), currentPath === '/preposition' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      className: "selected"
+    }, "Les pr\xE9positions")), currentPath === '/find-color' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      className: "selected"
+    }, "Les couleurs")));
+  }
 }
 /* harmony default export */ __webpack_exports__["default"] = (Navigation);
 
@@ -4400,7 +4409,6 @@ function Timer({
     if (counter > 0) {
       timer = setTimeout(() => setCounter(prevCounter => prevCounter - 1), 1000);
     } else {
-      console.log('Game Over Triggered');
       onGameOver(); // Call the callback function when the timer reaches zero
     }
 
@@ -4499,7 +4507,6 @@ function saveNumberResults(userPoints, selectedLevel) {
     }
     return response.json();
   }).then(data => {
-    console.log('Success:', data);
     return data;
   }).catch(error => {
     console.error('Error:', error);
@@ -4559,6 +4566,128 @@ function useFetch(url, shouldFetch = true) {
 
 /***/ }),
 
+/***/ "./src/pages/FindColor.js":
+/*!********************************!*\
+  !*** ./src/pages/FindColor.js ***!
+  \********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _assets_SuccessSound_mp3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/SuccessSound.mp3 */ "./src/assets/SuccessSound.mp3");
+/* harmony import */ var _data_FrenchColors_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../data/FrenchColors.json */ "./src/data/FrenchColors.json");
+
+
+
+
+function FindColor() {
+  const frenchColorsCSS = Object.values(_data_FrenchColors_json__WEBPACK_IMPORTED_MODULE_3__.easy);
+  const frenchColorsNames = Object.keys(_data_FrenchColors_json__WEBPACK_IMPORTED_MODULE_3__.easy);
+  const [cards, setCards] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
+  const [turns, setTurns] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [choiceOne, setChoiceOne] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  const [choiceTwo, setChoiceTwo] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  const [disabled, setDisabled] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  function shuffleCards() {
+    const shuffledCards = [...frenchColorsCSS, ...frenchColorsNames].sort(() => Math.random() - 0.5).map(card => ({
+      value: card,
+      id: Math.random(),
+      matched: false
+    }));
+    console.log(shuffledCards);
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setCards(shuffledCards);
+    setTurns(0);
+  }
+  function handleCardClick(card) {
+    if (!disabled) {
+      choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+    }
+  }
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => shuffleCards(), []);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (choiceOne && choiceTwo) {
+      setDisabled(true);
+      if (frenchColorsCSS.includes(choiceOne.value) && frenchColorsCSS.includes(choiceTwo.value) || frenchColorsNames.includes(choiceOne.value) && frenchColorsNames.includes(choiceTwo.value)) {
+        setTimeout(() => resetTurn(), 1000);
+      } else {
+        if (_data_FrenchColors_json__WEBPACK_IMPORTED_MODULE_3__.easy[choiceOne.value] === choiceTwo.value || _data_FrenchColors_json__WEBPACK_IMPORTED_MODULE_3__.easy[choiceTwo.value] === choiceOne.value) {
+          setTimeout(() => {
+            const successAudio = new Audio(_assets_SuccessSound_mp3__WEBPACK_IMPORTED_MODULE_2__["default"]);
+            successAudio.play();
+            setCards(prevCards => {
+              return prevCards.map(card => {
+                if (card.value === choiceOne?.value || card.value === choiceTwo?.value) {
+                  return {
+                    ...card,
+                    matched: true
+                  };
+                } else return card;
+              });
+            });
+          }, 500);
+          setTimeout(() => resetTurn(), 1000);
+        } else {
+          setTimeout(() => resetTurn(), 1000);
+        }
+      }
+    }
+  }, [choiceOne, choiceTwo]);
+  function resetTurn() {
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setTurns(prevTurn => prevTurn + 1);
+    setDisabled(false);
+  }
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "find-color-wrapper"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "card-grid"
+  }, cards.map(card => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: card.id,
+    className: "card"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: card === choiceOne || card === choiceTwo || card.matched ? 'flipped' : ''
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "front",
+    style: frenchColorsCSS.includes(card.value) || card.matched ? {
+      backgroundColor: frenchColorsCSS.includes(card.value) ? card.value : _data_FrenchColors_json__WEBPACK_IMPORTED_MODULE_3__.easy[card.value],
+      color: 'white',
+      textShadow: '1px 1px 1px black'
+    } : {
+      backgroundColor: 'white'
+    }
+  }, (frenchColorsNames.includes(card.value) || card.matched) && (frenchColorsNames.includes(card.value) ? card.value : Object.keys(_data_FrenchColors_json__WEBPACK_IMPORTED_MODULE_3__.easy).find(k => _data_FrenchColors_json__WEBPACK_IMPORTED_MODULE_3__.easy[k] === card.value))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "back",
+    onClick: () => handleCardClick(card)
+  }, "?"))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "game-footer"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "main-highlight"
+  }, "Essais : ", turns), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    onClick: shuffleCards
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    fill: "currentColor",
+    class: "bi bi-arrow-clockwise",
+    viewBox: "0 0 16 16"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    "fill-rule": "evenodd",
+    d: "M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"
+  })), ' ', "Recommecer")));
+}
+/* harmony default export */ __webpack_exports__["default"] = (FindColor);
+
+/***/ }),
+
 /***/ "./src/pages/FindNumber.js":
 /*!*********************************!*\
   !*** ./src/pages/FindNumber.js ***!
@@ -4583,8 +4712,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 //components
+
 
 
 
@@ -4598,6 +4727,7 @@ function FindNumber() {
   const [shouldBounce, setShouldBounce] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [pointWinnedAnimation, setPointWinnedAnimation] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [pointLostAnimation, setPointLostAnimation] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [gameDurationInSec, setGameDurationInSec] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(30);
   const [isSavedDone, setIsSavedDone] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const inputRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(true);
   const initialState = {
@@ -4671,21 +4801,21 @@ function FindNumber() {
         return draft;
     }
   }
-  let howManyseconds = 30;
-  switch (state.selectedLevel) {
-    case 'easy':
-      howManyseconds = 8;
-      break;
-    case 'intermediate':
-      howManyseconds = 60;
-      break;
-    case 'hard':
-      howManyseconds = 120;
-      break;
-    default:
-      howManyseconds = 20;
-      break;
-  }
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    switch (state.selectedLevel) {
+      case 'easy':
+        setGameDurationInSec(30);
+        break;
+      case 'intermediate':
+        setGameDurationInSec(60);
+        break;
+      case 'hard':
+        setGameDurationInSec(120);
+        break;
+      default:
+        setGameDurationInSec(30);
+    }
+  }, [state.selectedLevel]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let selectedLevelNumbers = _data_FrenchNumbers_json__WEBPACK_IMPORTED_MODULE_3__[state.selectedLevel];
     let filteredKeys = [];
@@ -4717,7 +4847,7 @@ function FindNumber() {
     hard: 'Difficile'
   };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_PageLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "game-wrapper"
+    className: "find-number-wrapper"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: state.isLevelVisible ? 'select-level-wrapper' : 'hide'
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "S\xE9lectionne ton niveau"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -4735,7 +4865,7 @@ function FindNumber() {
     className: "game-header"
   }, state.isPlaying ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_timer__WEBPACK_IMPORTED_MODULE_4__["default"], {
     key: timerKey,
-    howManyseconds: howManyseconds,
+    howManyseconds: gameDurationInSec,
     onGameOver: () => {
       dispatch({
         type: 'gameOver'
@@ -4833,6 +4963,23 @@ function Home() {
   }, "Les nombres, des maths ?"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "description"
   }, "Retrouve les bons nombres, le plus rapidemment possible..."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "rating"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "link"
+  }, "Jouer"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/find-color"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "card",
+    style: {
+      '--rating': 90
+    }
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "icon"
+  }, "\uD83E\uDD84"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "title"
+  }, "Les couleurs et la m\xE9moire"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "description"
+  }, "Travaille ta m\xE9moire, et tes couleurs !"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "rating"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "link"
@@ -8844,6 +8991,16 @@ function castImmutable(value) {
 }
 
 //# sourceMappingURL=immer.mjs.map
+
+/***/ }),
+
+/***/ "./src/data/FrenchColors.json":
+/*!************************************!*\
+  !*** ./src/data/FrenchColors.json ***!
+  \************************************/
+/***/ (function(module) {
+
+module.exports = JSON.parse('{"easy":{"Blanc":"White","Noir":"Black","Rouge":"Red","Vert":"Green","Bleu":"Blue","Jaune":"Yellow","Orange.":"Orange","Marron":"Brown","Gris":"Gray","Rose":"Pink"}}');
 
 /***/ }),
 

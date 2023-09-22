@@ -20,7 +20,6 @@ export function saveNumberResults(userPoints, selectedLevel) {
       return response.json()
     })
     .then((data) => {
-      console.log('Success:', data)
       return data
     })
     .catch((error) => {
