@@ -10,6 +10,8 @@ add_action('rest_api_init', function () {
   register_rest_route('better-grammar/v1', '/find_number_top_15/(?P<level>[a-zA-Z]+)', array(
     'methods' => 'GET',
     'callback' => 'get_find_number_top_15',
+    'permission_callback' => '__return_true',  
+
   ));
 });
 
@@ -42,6 +44,7 @@ add_action('rest_api_init', function () {
   register_rest_route('better-grammar/v1', '/find_number_top_5/(?P<level>[a-zA-Z]+)', array(
     'methods' => 'GET',
     'callback' => 'get_user_top_5_results',
+    'permission_callback' => '__return_true',  
   ));
 });
 
@@ -79,7 +82,7 @@ add_action('rest_api_init', function () {
   register_rest_route('better-grammar/v1', '/add_find_number_result', array(
     'methods' => 'POST',
     'callback' => 'add_find_number_result',
-    'permission_callback' => 'is_user_logged_in',
+    'permission_callback' => '__return_true',  
   ));
 });
 

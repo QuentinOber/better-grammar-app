@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import LoginBanner from './LoginBanner'
-import { formatDate } from '../hooks/DateFormat'
+import { useFormatDate } from '../hooks/useDateFormat'
 import useFetch from '../hooks/useFetch'
 
 function ScoreBoard({ onRestartGame, userPoints, isSavedDone, level }) {
@@ -67,7 +67,7 @@ function ScoreBoard({ onRestartGame, userPoints, isSavedDone, level }) {
                     <td>
                       <span className="main-highlight">{score.game_results}</span>
                     </td>
-                    <td>{formatDate(score.result_date)}</td>
+                    <td>{useFormatDate(score.result_date)}</td>
                   </tr>
                 ))}
             </tbody>

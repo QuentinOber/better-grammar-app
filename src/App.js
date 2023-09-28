@@ -9,7 +9,7 @@ import AppDispatch from './data/AppDispatch'
 import Navigation from './components/Navigation'
 import Home from './pages/Home'
 import FindNumber from './pages/FindNumber'
-import Preposition from './pages/Preposition'
+import FindPreposition from './pages/FindPreposition'
 import FindColor from './pages/FindColor'
 
 function App() {
@@ -41,10 +41,11 @@ function App() {
     <AppContext.Provider value={state}>
       <AppDispatch.Provider value={dispatch}>
         <Navigation />
+
         <Routes>
           <Route path="/find-number" element={<FindNumber />} />
           <Route path="/find-color" element={<FindColor />} />
-          <Route path="/preposition" element={<Preposition />} />
+          <Route path="/preposition" element={<FindPreposition />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </AppDispatch.Provider>

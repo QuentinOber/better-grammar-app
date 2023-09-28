@@ -10,7 +10,7 @@ import SuccessSound from '../assets/SuccessSound.mp3'
 import FailedSound from '../assets/FailedSound.mp3'
 
 //hooks
-import { saveNumberResults } from '../hooks/SaveResults'
+import { useSaveNumberResults } from '../hooks/useSaveResults'
 
 function FindNumber() {
   const [randomNumber, setRandomNumber] = useState(null)
@@ -68,7 +68,7 @@ function FindNumber() {
         draft.isPlaying = false
         inputRef.current.value = ''
         if (user && user.logged_in === '1') {
-          saveNumberResults(draft.userPoints, draft.selectedLevel)
+          useSaveNumberResults(draft.userPoints, draft.selectedLevel)
             .then(() => {
               setIsSavedDone(true)
             })

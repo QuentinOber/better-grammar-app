@@ -1,9 +1,13 @@
-export function saveNumberResults(userPoints, selectedLevel) {
+export function useSaveNumberResults(userPoints, selectedLevel) {
   const data = {
     game_results: userPoints,
     game_level: selectedLevel,
   }
   const nonce = wpApiSettings.nonce
+
+  // URL TO FETCH
+  const addNumberResultsURL = '/wp-json/better-grammar/v1/add_find_number_result'
+  const addPrepositionResultsURL = '/wp-json/better-grammar/v1/add_preposition_result'
 
   return fetch('/wp-json/better-grammar/v1/add_find_number_result', {
     method: 'POST',
