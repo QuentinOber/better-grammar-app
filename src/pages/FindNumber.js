@@ -10,7 +10,7 @@ import SuccessSound from '../assets/SuccessSound.mp3'
 import FailedSound from '../assets/FailedSound.mp3'
 
 //hooks
-import { useSaveNumberResults } from '../hooks/useSaveResults'
+import { useSaveResults } from '../hooks/useSaveResults'
 
 function FindNumber() {
   const [randomNumber, setRandomNumber] = useState(null)
@@ -39,8 +39,6 @@ function FindNumber() {
   const [keys, setKeys] = useState([])
   const [state, dispatch] = useImmerReducer(numberReducer, initialState)
 
-  console.log(state)
-
   function numberReducer(draft, action) {
     switch (action.type) {
       case 'selectLevel':
@@ -68,7 +66,7 @@ function FindNumber() {
         draft.isPlaying = false
         inputRef.current.value = ''
         if (user && user.logged_in === '1') {
-          useSaveNumberResults(draft.userPoints, draft.selectedLevel)
+          useSaveResults(draft.userPoints, draft.selectedLevel, 'number')
             .then(() => {
               setIsSavedDone(true)
             })
@@ -105,13 +103,9 @@ function FindNumber() {
         setPointLostAnimation(true)
         setTimeout(() => setPointLostAnimation(false), 300)
         draft.skippedNumbers[randomNumber.key] = randomNumber.value
-        console.log(Object.keys(draft.skippedNumbers))
         draft.userPoints > 0 && draft.userPoints--
         inputRef.current.value = ''
 
-        return
-      case 'test':
-        console.log('test')
         return
       default:
         return draft
@@ -204,6 +198,7 @@ function FindNumber() {
             }}
             isSavedDone={isSavedDone}
             level={state.selectedLevel}
+            activity="number"
           />
         </div>
 

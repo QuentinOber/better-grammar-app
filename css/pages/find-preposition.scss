@@ -1,8 +1,7 @@
-.find-number-wrapper {
+.find-preposition-wrapper {
   margin: auto;
   .select-level-wrapper {
-    margin-top: 20px;
-
+    margin-top: 30px;
     h1 {
       text-align: center;
     }
@@ -16,9 +15,9 @@
     }
   }
 
-  .wrapper-number-game {
+  .wrapper-preposition-game {
     margin: 10px auto 0px;
-    padding: 20px 10px 10px;
+    padding: 20px 0px 10px;
     @include atBig {
       border: 4px solid $mainBlue;
       border-radius: 8px;
@@ -38,17 +37,17 @@
       display: flex;
       justify-content: space-between;
     }
-    .number {
-      font-size: 95px;
+    .preposition {
+      font-size: 35px;
       font-weight: 600;
       text-align: center;
-      margin: 10px 20px;
-      text-shadow: 4px 4px $lightBlue;
+      margin: 60px 0px;
+      text-shadow: 1px 1px $lightBlue;
       z-index: 100;
       line-height: 100%;
       @include atBig {
-        margin: 0 0 40px 0;
-        font-size: 150px;
+        margin: 60px 0 50px 0;
+        font-size: 40px;
       }
     }
     .game-actions {
@@ -56,25 +55,50 @@
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-
-      input[type='text'] {
-        @include atBig {
-          width: 500px;
-          font-size: 25px;
-        }
-        width: 100%;
-        font-size: 22px;
-        height: 60px;
-        padding: 10px;
-        border: 4px solid $mainBlue;
-        border-radius: 5px;
-        box-shadow: 2px 2px $mainBlue;
-      }
       .game-button {
-        padding: 5px 30px;
-        font-weight: 600;
-        line-height: 40px;
-        font-size: 35px;
+        padding: 5px 22px;
+        font-size: 26px;
+        @include atBig {
+          padding: 10px 22px;
+          font-size: 26px;
+        }
+      }
+
+      label {
+        display: flex;
+        margin: 5px;
+        display: inline-block;
+        padding: 15px;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        background-color: $mainBlue;
+        border: 2px solid $mainBlue;
+        border-radius: 10px;
+        box-shadow: 5px 5px 0px $lightBlue;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        @include atBig {
+          padding: 20px;
+          &:hover {
+            background-color: #fff;
+            color: $mainRed;
+            border: 2px solid $mainBlue;
+            box-shadow: 5px 5px 0px $mainBlue;
+          }
+        }
+
+        &:active {
+          background-color: #fcf414;
+          box-shadow: none;
+          transform: translateY(4px);
+        }
+      }
+      input {
+        position: absolute;
+        opacity: 0;
       }
     }
     .skip {
@@ -86,7 +110,7 @@
       text-decoration: none;
     }
   }
-  .missed-numbers {
+  .missed-prepositions {
     max-width: 450px;
     background-color: $lightBlue;
     border-radius: 5px;

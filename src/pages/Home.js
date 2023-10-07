@@ -34,8 +34,8 @@ function Home() {
             </div>
           </Link>
           <Link to="/preposition">
-            <div className="card" style={{ '--rating': 0 }}>
-              <div className="icon">🔜</div>
+            <div className="card" style={{ '--rating': 100 }}>
+              <div className="icon">🚀</div>
               <div className="title">Les prépositions (à, de, pour...)</div>
               <p className="description">Retrouve les bonnes prépositions, dans différents contextes...</p>
               <div className="rating"></div>

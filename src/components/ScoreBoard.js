@@ -3,19 +3,19 @@ import LoginBanner from './LoginBanner'
 import { useFormatDate } from '../hooks/useDateFormat'
 import useFetch from '../hooks/useFetch'
 
-function ScoreBoard({ onRestartGame, userPoints, isSavedDone, level }) {
+function ScoreBoard({ onRestartGame, userPoints, isSavedDone, level, activity }) {
   let isLoggedIn = false
   if (typeof user !== 'undefined') {
     isLoggedIn = user.logged_in === '1'
   }
 
   let urlMyTopScores
-  isLoggedIn ? (urlMyTopScores = `/wp-json/better-grammar/v1/find_number_top_5/${level}`) : (urlMyTopScores = null)
+  isLoggedIn ? (urlMyTopScores = `/wp-json/better-grammar/v1/find_${activity}_top_5/${level}`) : (urlMyTopScores = null)
 
   const [topScores, setTopScores] = useState(null)
   const [myScores, setMyScores] = useState(null)
 
-  const { data: topScoresData } = useFetch(`/wp-json/better-grammar/v1/find_number_top_15/${level}`, isSavedDone)
+  const { data: topScoresData } = useFetch(`/wp-json/better-grammar/v1/find_${activity}_top_15/${level}`, isSavedDone)
   const { data: myScoresData } = useFetch(urlMyTopScores, isSavedDone)
 
   useEffect(() => {

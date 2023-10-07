@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Register all CUSTON API BETTER GRAMMAR APP
+ * Register all CUSTON API FOR FIND PREPOSITION
  */
 
 // get the top 15 results 
 
 add_action('rest_api_init', function () {
-  register_rest_route('better-grammar/v1', '/find_number_top_15/(?P<level>[a-zA-Z]+)', array(
+  register_rest_route('better-grammar/v1', '/find_preposition_top_15/(?P<level>[a-zA-Z]+)', array(
     'methods' => 'GET',
-    'callback' => 'get_find_number_top_15',
+    'callback' => 'get_find_preposition_top_15',
     'permission_callback' => '__return_true',  
 
   ));
 });
 
-function get_find_number_top_15($request) {
+function get_find_preposition_top_15($request) {
   $level = $request->get_param('level');
   
   // Check if the level is valid
@@ -25,30 +25,30 @@ function get_find_number_top_15($request) {
   }
 
   global $wpdb;
-  $FindNumberResultsName = $wpdb->prefix . 'bg_find_number_results';
+  $FindPrepositionResultsName = $wpdb->prefix . 'bg_find_preposition_results';
   
-  $FindNumberResults = $wpdb->get_results(
+  $FindPrepositionResults = $wpdb->get_results(
     $wpdb->prepare("SELECT username, game_results, result_date
-    FROM $FindNumberResultsName
+    FROM $FindPrepositionResultsName
     WHERE game_level = %s
     ORDER BY game_results DESC
     LIMIT 15", $level)
   );
 
-  return $FindNumberResults;
+  return $FindPrepositionResults;
 }
 
 // GET TOP 5 RESULTS
 
 add_action('rest_api_init', function () {
-  register_rest_route('better-grammar/v1', '/find_number_top_5/(?P<level>[a-zA-Z]+)', array(
+  register_rest_route('better-grammar/v1', '/find_preposition_top_5/(?P<level>[a-zA-Z]+)', array(
     'methods' => 'GET',
-    'callback' => 'get_user_top_5_results',
+    'callback' => 'get_user_top_5_preposition_results',
     'permission_callback' => '__return_true',  
   ));
 });
 
-function get_user_top_5_results($request) {
+function get_user_top_5_preposition_results($request) {
   $level = $request->get_param('level');
 
 // Check if the level is valid
@@ -60,7 +60,7 @@ if (!in_array($level, $valid_levels)) {
   $user_id = get_current_user_id();
 
   global $wpdb;
-  $table_name = $wpdb->prefix . 'bg_find_number_results';
+  $table_name = $wpdb->prefix . 'bg_find_preposition_results';
 
   $query = $wpdb->prepare(
     "SELECT game_results, result_date, game_level FROM $table_name WHERE user_id = %d AND game_level = %s ORDER BY game_results DESC LIMIT 5",
@@ -79,14 +79,14 @@ if (!in_array($level, $valid_levels)) {
 
 // SAVE INDIVIDUAL RESULTS
 add_action('rest_api_init', function () {
-  register_rest_route('better-grammar/v1', '/add_find_number_result', array(
+  register_rest_route('better-grammar/v1', '/add_find_preposition_result', array(
     'methods' => 'POST',
-    'callback' => 'add_find_number_result',
+    'callback' => 'add_find_preposition_result',
     'permission_callback' => '__return_true',  
   ));
 });
 
-function add_find_number_result($request) {
+function add_find_preposition_result($request) {
   $user_id = get_current_user_id(); // This assumes the user is logged in
   $username = wp_get_current_user()->user_login;
   $game_results = $request->get_param('game_results');
@@ -96,10 +96,10 @@ function add_find_number_result($request) {
   // Global $wpdb for database operations
   global $wpdb;
 
-  $FindNumberResultsName = $wpdb->prefix . 'bg_find_number_results';
+  $FindPrepositionResultsName = $wpdb->prefix . 'bg_find_preposition_results';
 
   $inserted = $wpdb->insert(
-    $FindNumberResultsName,
+    $FindPrepositionResultsName,
     array(
       'user_id' => $user_id,
       'username' => $username,

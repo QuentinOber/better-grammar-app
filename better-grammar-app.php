@@ -18,9 +18,13 @@ define( 'BETTER_GRAMMAR_APP', '1.0.0' );
 
 // DATABASES ACTIVATION
 include_once(plugin_dir_path(__FILE__) . 'includes/find-number-databases.php');
-include_once(plugin_dir_path(__FILE__) . 'includes/custom-routes.php');
+include_once(plugin_dir_path(__FILE__) . 'includes/custom-routes-find-numbers.php');
+include_once(plugin_dir_path(__FILE__) . 'includes/find-preposition-databases.php');
+include_once(plugin_dir_path(__FILE__) . 'includes/custom-routes-find-prepositions.php');
 
 register_activation_hook(__FILE__, 'create_find_number_table');
+register_activation_hook(__FILE__, 'create_find_preposition_table');
+
 
 function check_for_shortcode($posts) {
 	if (empty($posts)) {
@@ -65,13 +69,6 @@ function enqueue_bettergrammarapp_scripts() {
 	));
 }
 // add_action('wp_enqueue_scripts', 'enqueue_bettergrammarapp_scripts', 99);
-
-function register_my_custom_block() {
-	register_block_type_from_metadata(
-			plugin_dir_path(__FILE__)
-	);
-}
-add_action('init', 'register_my_custom_block');
 
 function better_grammar_shortcode() {
 	return '<div id="better-grammar-app" class="better-grammar-app"></div>';
