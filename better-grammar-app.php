@@ -26,35 +26,17 @@ register_activation_hook(__FILE__, 'create_find_number_table');
 register_activation_hook(__FILE__, 'create_find_preposition_table');
 
 
-function check_for_shortcode($posts) {
-	if (empty($posts)) {
-			return $posts;
-	}
-
-	$found = false;
-
-	foreach ($posts as $post) {
-			if (has_shortcode($post->post_content, 'better_grammar')) {
-					$found = true;
-					break;
-			}
-	}
-
-	if ($found) {
-			enqueue_bettergrammarapp_scripts();
-	}
-
-	return $posts;
-}
-
-add_filter('the_posts', 'check_for_shortcode');
-
-
-
 function enqueue_bettergrammarapp_scripts() {
 	$plugin_data = get_file_data(__FILE__, array('Version' => 'Version'), false);
 	$plugin_version = $plugin_data['Version'];
 
+	// enqueue only if page games
+	global $wp;
+	$current_url = home_url(add_query_arg(array(), $wp->request));
+
+	if (strpos($current_url, 'games') === false) {
+		return;
+}
 	wp_enqueue_script('bettergrammar-main-scripts', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-element'), $plugin_version, true);
 	wp_enqueue_style('bettergrammar-main-styles', plugin_dir_url(__FILE__) . 'build/index.css', array(), $plugin_version);
 
@@ -68,7 +50,7 @@ function enqueue_bettergrammarapp_scripts() {
 		'login_url' => wp_login_url()
 	));
 }
-// add_action('wp_enqueue_scripts', 'enqueue_bettergrammarapp_scripts', 99);
+add_action('wp_enqueue_scripts', 'enqueue_bettergrammarapp_scripts', 99);
 
 function better_grammar_shortcode() {
 	return '<div id="better-grammar-app" class="better-grammar-app"></div>';
