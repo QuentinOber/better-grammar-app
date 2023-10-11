@@ -12,6 +12,8 @@ import FailedSound from '../assets/FailedSound.mp3'
 //hooks
 import { useSaveResults } from '../hooks/useSaveResults'
 
+const allPreposition = ['à', 'de', 'pour', 'au', 'aux', 'dans', 'sur', 'avec', 'en', 'du', 'chez']
+
 function FindPreposition() {
   const [randomPreposition, setRandomPreposition] = useState(null)
   const [timerKey, setTimerKey] = useState(0)
@@ -19,9 +21,8 @@ function FindPreposition() {
   const [pointWinnedAnimation, setPointWinnedAnimation] = useState(false)
   const [pointLostAnimation, setPointLostAnimation] = useState(false)
   const [gameDurationInSec, setGameDurationInSec] = useState(null)
-
+  const [prepositionChoices, setPrepositionChoices] = useState([])
   const [isSavedDone, setIsSavedDone] = useState(false)
-  const allPreposition = ['à', 'de', 'pour', 'au', 'aux', 'dans', 'sur', 'avec', 'en', 'du', 'chez']
 
   const initialState = {
     isLevelVisible: true,
@@ -81,15 +82,19 @@ function FindPreposition() {
         setTimerKey((prevKey) => prevKey + 1)
         return
       case 'checkAnswer':
-        if (action.value == randomPreposition.value) {
+        console.log('User answer:', action.value)
+        console.log('Correct answer:', randomPreposition.value)
+        if (action.value === randomPreposition.value) {
           const successAudio = new Audio(SuccessSound)
           successAudio.play()
           draft.foundPrepositions.push(randomPreposition.key)
           draft.userPoints = draft.userPoints + 2
+          //setPrepositionChoices(null)
           setPointWinnedAnimation(true)
           setTimeout(() => setPointWinnedAnimation(false), 500)
           setShouldBounce(true)
           setTimeout(() => setShouldBounce(false), 1000)
+
           return
         } else {
           const failedAudio = new Audio(FailedSound)
@@ -98,6 +103,7 @@ function FindPreposition() {
           setTimeout(() => setPointLostAnimation(false), 300)
           draft.skippedPrepositions[randomPreposition.key] = randomPreposition.value
           draft.userPoints > 0 && draft.userPoints--
+          //setPrepositionChoices(null)
           return
         }
 
@@ -108,7 +114,7 @@ function FindPreposition() {
         setTimeout(() => setPointLostAnimation(false), 300)
         draft.skippedPrepositions[randomPreposition.key] = randomPreposition.value
         draft.userPoints > 0 && draft.userPoints--
-
+        //setPrepositionChoices(null)
         return
       default:
         return draft
@@ -139,6 +145,30 @@ function FindPreposition() {
   }, [state.foundPrepositions, state.skippedPrepositions, keys])
 
   const allLevels = { easy: 'Facile', intermediate: 'Intermédiare', hard: 'Difficile' }
+
+  useEffect(() => {
+    const choices = [] // Clear previous choices
+
+    if (randomPreposition) {
+      choices.push(randomPreposition.value)
+
+      while (choices.length < 4) {
+        const index = Math.floor(Math.random() * allPreposition.length)
+        const selectedChoice = allPreposition[index]
+
+        if (!choices.includes(selectedChoice)) {
+          choices.push(selectedChoice)
+        }
+      }
+
+      // Shuffle the choices so that the correct answer is not always the first one
+      choices.sort(() => Math.random() - 0.5)
+
+      console.log('Choices before setting state:', choices) // Debug
+    }
+
+    setPrepositionChoices(choices)
+  }, [randomPreposition])
 
   return (
     <PageLayout>
@@ -179,14 +209,15 @@ function FindPreposition() {
             </p>
 
             <div className="game-actions">
-              {allPreposition.map((preposition) => (
-                <label>
+              {prepositionChoices.map((preposition) => (
+                <label key={`${randomPreposition.key}-${preposition}`}>
                   <input
                     unchecked
                     type="radio"
                     name="preposition"
                     value={preposition}
                     onChange={(e) => {
+                      console.log(e.target.value)
                       dispatch({ type: 'checkAnswer', value: e.target.value })
                     }}
                   />
